@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:instasend/utils/constants.dart';
 
 void main() {
   WidgetsFlutterBinding
@@ -19,7 +20,8 @@ class _MyAppState extends State<MyApp> {
     = Firebase.initializeApp();
 
   final materialApp = MaterialApp(
-    title: 'Flutter Demo',
+    title: 'Instasend',
+    theme: lightTheme,
     home: Container(),
   );
 
@@ -28,9 +30,12 @@ class _MyAppState extends State<MyApp> {
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done)
-          return materialApp;
+        // Get firebase's connection state
+        final state = snapshot.connectionState;
 
+        // Decide what screen to show based on state
+        if (state == ConnectionState.done)
+          return materialApp;
         return Container();
       }
     );
