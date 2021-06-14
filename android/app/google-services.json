@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "211944329141",
+    "project_id": "instasend-ph",
+    "storage_bucket": "instasend-ph.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211944329141:android:c86fa51debcd46f71353fc",
+        "android_client_info": {
+          "package_name": "wtf.liempo.instasend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211944329141-30t44j5br74obhsajbh4quq93coabqi7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wtf.liempo.instasend",
+            "certificate_hash": "0753b62b8faf50c7374dc100180b5c1ba07857c5"
+          }
+        },
+        {
+          "client_id": "211944329141-3la8nim485jlmpkb59pfsp6r6o9egfce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoCgsrmx0YLqSNLWGYbgNIxJl467QvyKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211944329141-3la8nim485jlmpkb59pfsp6r6o9egfce.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "211944329141-rftm5jei4u8sss4f46ambrr4kkh4f6hf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "wtf.liempo.instasend"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
