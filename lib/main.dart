@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   final materialApp = MaterialApp(
     title: 'Instasend',
     theme: lightTheme,
-    home: AuthScreen(),
+    home: AuthScreen.withProvider(),
   );
 
   @override

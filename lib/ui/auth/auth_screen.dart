@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:instasend/ui/auth/login_form.dart';
+import 'package:instasend/ui/auth/recover_form.dart';
+import 'package:provider/provider.dart';
+
+import '/models/auth_type.dart';
+import '/providers/auth_provider.dart';
+
+import 'login_form.dart';
+import 'register_form.dart';
 
 class AuthScreen extends StatefulWidget {
 
@@ -10,9 +17,19 @@ class AuthScreen extends StatefulWidget {
   @override
   _AuthScreenState createState() => _AuthScreenState();
 
+  static Widget withProvider() {
+    return ChangeNotifierProvider(
+      create: (context) => AuthProvider(),
+      builder: (context, child) => AuthScreen()
+    );
+  }
+
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+
+  late final _provider = Provider
+    .of<AuthProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -75,40 +92,78 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getActiveForm() {
-    return Container(
-      padding: EdgeInsets.only(
-        top: 24, left: 48, right: 48
-      ),
-      child: LoginForm(),
+    return Consumer<AuthProvider>(
+      builder: (context, value, child) {
+        // Create the form based on type
+        // NOTE: Not sure if I did this correctly,
+        //  because as far as I know, the View layer
+        //  should not be aware of the models. Fix pls.
+        Widget? form;
+        switch (value.type) {
+          case AuthType.LOGIN:
+            form = Column(
+              children: [
+                LoginForm(),
+                // Create an extension to LoginForm
+                TextButton(
+                  onPressed: () =>
+                    _provider.setTypeToRecover(),
+                  child: Text("Forgot password?")
+                )
+              ],
+            );
+            break;
+          case AuthType.REGISTER:
+            form = RegisterForm(); break;
+          case AuthType.RECOVER:
+            form = RecoverForm(); break;
+        }
+
+        // Return the widget with padding
+        return  Container(
+          padding: EdgeInsets.only(
+            top: 24, left: 48, right: 48
+          ),
+          child: form,
+        );
+      },
     );
   }
 
   Widget _getAlternateButton() {
-    return Container(
-      padding: EdgeInsets.only(bottom: 16),
-      // Hide when keyboard is visible
-      child: TextButton(
-        onPressed: () {},
-        child: Text("Don't have an account?")
-      ),
+    return Consumer<AuthProvider>(
+      builder: (context, value, child) {
+        return Container(
+          padding: EdgeInsets.only(bottom: 16),
+          // Hide when keyboard is visible
+          child: TextButton(
+            onPressed: () => value.swap(),
+            child: Text(value.getAlternateButtonText())
+          ),
+        );
+      },
     );
   }
 
   Widget _getSubmitButton() {
-    return Container(
-      height: 60,
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(
-        horizontal: 32
-      ),
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Text(
-          "Login",
-          style: Theme.of(context)
-            .primaryTextTheme.subtitle1
-        ),
-      )
+    return Consumer<AuthProvider>(
+      builder: (context, value, child) {
+        return Container(
+          height: 60,
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(
+            horizontal: 32
+          ),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              value.getPrimaryButtonText(),
+              style: Theme.of(context)
+                .primaryTextTheme.subtitle1
+            ),
+          )
+        );
+      },
     );
   }
 

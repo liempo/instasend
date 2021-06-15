@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginForm extends StatelessWidget {
+class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,13 @@ class LoginForm extends StatelessWidget {
             obscureText: true,
             decoration: InputDecoration(
               labelText: "Password"
+            )
+          ),
+          SizedBox(height: spacing),
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: "Confirm Password"
             )
           ),
         ],
