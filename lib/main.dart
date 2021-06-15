@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:instasend/utils/constants.dart';
+
+import '/utils/constants.dart';
+import '/ui/auth/auth_screen.dart';
 
 void main() {
   WidgetsFlutterBinding
@@ -14,7 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   // Firebase future initialization
   final Future<FirebaseApp> _initialization
     = Firebase.initializeApp();
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   final materialApp = MaterialApp(
     title: 'Instasend',
     theme: lightTheme,
-    home: Container(),
+    home: AuthScreen(),
   );
 
   @override
