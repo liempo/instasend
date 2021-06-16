@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
           final state = snapshot.connectionState;
           // Decide what screen to show based on state
           if (state == ConnectionState.done)
-            return AuthScreen.withProvider();
+            return AuthScreen.withViewModel();
           return SplashScreen();
         },
       )

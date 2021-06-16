@@ -3,7 +3,7 @@ import 'package:instasend/ui/auth/recover_form.dart';
 import 'package:provider/provider.dart';
 
 import '/models/auth_type.dart';
-import '/providers/auth_provider.dart';
+import '/view_models/auth_model.dart';
 import '/utils/image_extension.dart';
 
 import 'login_form.dart';
@@ -18,9 +18,9 @@ class AuthScreen extends StatefulWidget {
   @override
   _AuthScreenState createState() => _AuthScreenState();
 
-  static Widget withProvider() {
+  static Widget withViewModel() {
     return ChangeNotifierProvider(
-      create: (context) => AuthProvider(),
+      create: (context) => AuthModel(),
       builder: (context, child) => AuthScreen()
     );
   }
@@ -30,7 +30,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
 
   late final _provider = Provider
-    .of<AuthProvider>(context, listen: false);
+    .of<AuthModel>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getActiveForm() {
-    return Consumer<AuthProvider>(
+    return Consumer<AuthModel>(
       builder: (context, value, child) {
         // Create the form based on type
         // NOTE: Not sure if I did this correctly,
@@ -137,7 +137,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getAlternateButton() {
-    return Consumer<AuthProvider>(
+    return Consumer<AuthModel>(
       builder: (context, value, child) {
         return Container(
           padding: EdgeInsets.only(
@@ -154,7 +154,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getSubmitButton() {
-    return Consumer<AuthProvider>(
+    return Consumer<AuthModel>(
       builder: (context, value, child) {
         return Container(
           height: 60,

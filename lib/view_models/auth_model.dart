@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/auth_type.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AuthModel extends ChangeNotifier {
 
   // Determines what form to show in the UI
   AuthType _type = AuthType.LOGIN;
