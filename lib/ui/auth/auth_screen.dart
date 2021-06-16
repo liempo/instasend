@@ -76,15 +76,23 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getBrandingImage() {
+    final size = MediaQuery
+      .of(context).size;
     final image = Container(
       child: Image.asset(
-        'assets/logos/script.png', height: 128,
+        'assets/logos/script.png',
+        // Set to 20% of screen
+        height: size.height * 0.2
       ).withTint(
         color: Theme.of(context)
           .primaryColor
       )
     );
-    return _isKeyboardVisible() ? Container() : image;
+    final placeholder = Container(
+      height: size.height * 0.05,
+    );
+    return _isKeyboardVisible() ?
+      placeholder : image;
   }
 
   Widget _getActiveForm() {
@@ -98,6 +106,8 @@ class _AuthScreenState extends State<AuthScreen> {
         switch (value.type) {
           case AuthType.LOGIN:
             form = Column(
+              crossAxisAlignment:
+                CrossAxisAlignment.start,
               children: [
                 LoginForm(),
                 // Create an extension to LoginForm
@@ -130,7 +140,9 @@ class _AuthScreenState extends State<AuthScreen> {
     return Consumer<AuthProvider>(
       builder: (context, value, child) {
         return Container(
-          padding: EdgeInsets.only(bottom: 16),
+          padding: EdgeInsets.only(
+            bottom: _isKeyboardVisible() ? 0 : 32
+          ),
           // Hide when keyboard is visible
           child: TextButton(
             onPressed: () => value.swap(),
