@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '/models/auth_type.dart';
 import '/providers/auth_provider.dart';
+import '/utils/image_extension.dart';
 
 import 'login_form.dart';
 import 'register_form.dart';
@@ -76,18 +77,13 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Widget _getBrandingImage() {
     final image = Container(
-      child: ColorFiltered(
-        child: Image.asset(
-          'assets/logos/script.png',
-            height: 128,
-        ),
-        colorFilter: ColorFilter.mode(
-          Theme.of(context).primaryColor,
-            BlendMode.srcATop
-        )
-      ),
+      child: Image.asset(
+        'assets/logos/script.png', height: 128,
+      ).withTint(
+        color: Theme.of(context)
+          .primaryColor
+      )
     );
-
     return _isKeyboardVisible() ? Container() : image;
   }
 
