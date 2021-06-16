@@ -10,6 +10,12 @@ class RecoverForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            "Please enter your email " +
+              "associated to your account.",
+            style: Theme.of(context)
+              .textTheme.caption,
+          ),
           TextField(
             autocorrect: false,
             enableSuggestions: false,
@@ -19,7 +25,6 @@ class RecoverForm extends StatelessWidget {
             )
           ),
           SizedBox(height: spacing),
-
         ],
       ),
     );

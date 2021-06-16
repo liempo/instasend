@@ -10,6 +10,12 @@ class RegisterForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            "Create your account",
+            style: Theme.of(context)
+              .textTheme.subtitle1,
+          ),
+          SizedBox(height: spacing / 2),
           TextField(
             autocorrect: false,
             enableSuggestions: false,
