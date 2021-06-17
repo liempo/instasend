@@ -7,7 +7,7 @@ class AuthRepository extends ChangeNotifier {
   var _auth = FirebaseAuth.instance;
 
   // Create account using email and password
-  Future register({
+  Future<void> register({
     required String email,
     required String password
   }) async {
@@ -18,7 +18,7 @@ class AuthRepository extends ChangeNotifier {
   }
 
   // Authenticate using email and password
-  Future login({
+  Future<void> login({
     required String email,
     required String password
   }) async {
@@ -29,7 +29,7 @@ class AuthRepository extends ChangeNotifier {
     } catch (e) { print(e); }
   }
 
-  Future logout() async {
+  Future<void> logout() async {
     _auth.signOut();
   }
 
