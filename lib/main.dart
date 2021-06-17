@@ -6,7 +6,7 @@ import '/ui/splash/splash_screen.dart';
 
 void main() {
   // Setup the repository locator
-  setupRepositoriesLocator();
+  setupRepositoryLocator();
 
   // Ensure bindings are initialized
   WidgetsFlutterBinding
@@ -27,7 +27,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Instasend',
       theme: lightTheme,
-      home: SplashScreen()
+      home: SplashScreen
+        .withViewModel()
     );
   }
 }

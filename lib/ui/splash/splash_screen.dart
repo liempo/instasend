@@ -8,9 +8,10 @@ import '/view_models/splash_model.dart';
 
 class SplashScreen extends StatelessWidget {
 
-  static Widget withModel() {
+  static Widget withViewModel() {
     return ChangeNotifierProvider(
       create: (context) => SplashModel(),
+      builder: (context, child) => SplashScreen(),
     );
   }
 
@@ -21,9 +22,17 @@ class SplashScreen extends StatelessWidget {
       builder: (context, snapshot) {
         // Get firebase's connection state
         final state = snapshot.connectionState;
+
         // Decide what screen to show based on state
         if (state == ConnectionState.done)
-          return AuthScreen.withViewModel();
+          return Consumer<SplashModel>(
+            builder: (context, value, child) {
+              if (!value.isAuthenticated)
+                return AuthScreen.withViewModel();
+              return Container();
+            },
+          );
+
         // Show splash screen while firebase
         // connection is not yet established
         return Scaffold(

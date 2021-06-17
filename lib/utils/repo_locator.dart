@@ -7,7 +7,7 @@ import '/repositories/auth_repository.dart';
 final repos = GetIt.instance;
 
 // Call on main.dart before buiding UI
-void setupRepositoriesLocator() {
+void setupRepositoryLocator() {
   repos.registerLazySingleton(
     () => AuthRepository());
 }
