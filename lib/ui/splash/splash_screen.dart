@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 import '/ui/auth/auth_screen.dart';
 import '/utils/image_extension.dart';
+import '/view_models/splash_model.dart';
 
 class SplashScreen extends StatelessWidget {
+
+  static Widget withModel() {
+    return ChangeNotifierProvider(
+      create: (context) => SplashModel(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

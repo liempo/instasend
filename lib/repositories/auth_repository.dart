@@ -6,6 +6,10 @@ class AuthRepository extends ChangeNotifier {
   // Save the firebase auth instance
   var _auth = FirebaseAuth.instance;
 
+  // Using Stream to listen to Firebase user
+  Stream<User?> get user =>
+    _auth.authStateChanges();
+
   // Create account using email and password
   Future<void> register({
     required String email,
