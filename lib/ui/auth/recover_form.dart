@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '/view_models/auth_model.dart';
 
 class RecoverForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider
+      .of<AuthModel>(context);
     double spacing = 18;
+
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -16,12 +22,13 @@ class RecoverForm extends StatelessWidget {
             style: Theme.of(context)
               .textTheme.caption,
           ),
-          TextField(
+          TextFormField(
             autocorrect: false,
             enableSuggestions: false,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-                labelText: "Email"
+                labelText: "Email",
+                errorText: provider.errorEmail
             )
           ),
           SizedBox(height: spacing),

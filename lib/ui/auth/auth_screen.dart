@@ -128,7 +128,8 @@ class _AuthScreenState extends State<AuthScreen> {
         // Return the widget with padding
         return  Container(
           padding: EdgeInsets.only(
-            top: 24, left: 48, right: 48
+            top: _isKeyboardVisible() ? 4 : 24,
+            left: 48, right: 48
           ),
           child: form,
         );
@@ -163,7 +164,7 @@ class _AuthScreenState extends State<AuthScreen> {
             horizontal: 32
           ),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: value.submit,
             child: Text(
               value.getPrimaryButtonText(),
               style: Theme.of(context)
