@@ -126,6 +126,7 @@ class AuthModel extends ChangeNotifier {
 
     if (result != 'success')
       _errorEmail = result;
+    notifyListeners();
   }
 
 }

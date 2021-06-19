@@ -23,7 +23,9 @@ class LoginForm extends StatelessWidget {
             decoration: InputDecoration(
                 labelText: "Email",
                 errorText: provider.errorEmail
-            )
+            ),
+            onChanged: (text) =>
+              provider.email = text,
           ),
           SizedBox(height: spacing),
           TextField(
@@ -31,7 +33,9 @@ class LoginForm extends StatelessWidget {
             decoration: InputDecoration(
               labelText: "Password",
               errorText: provider.errorPassword
-            )
+            ),
+            onChanged: (text) =>
+              provider.password = text,
           ),
         ],
       ),
