@@ -97,13 +97,35 @@ class AuthModel extends ChangeNotifier {
     return _errorEmail == null && _errorPassword == null;
   }
 
-
-  void submit() {
-    if (!_checkFormValid()) {
-      print("not valid");
+  void submit() async {
+    if (!_checkFormValid())
       return;
+
+    // Add a ! notation because I know that these strings
+    // are not null because of _checkFormValid()
+    var email = _email!;
+    var password = _password!;
+
+    String result;
+    switch (_type) {
+      case AuthType.LOGIN:
+        result = await _auth.login(
+          email: email,
+          password: password);
+        break;
+      case AuthType.REGISTER:
+        result = await _auth.register(
+          email: email,
+          password: password);
+        break;
+      case AuthType.RECOVER:
+        result = await _auth.recover(
+          email: email);
+        break;
     }
 
+    if (result != 'success')
+      _errorEmail = result;
   }
 
 }
