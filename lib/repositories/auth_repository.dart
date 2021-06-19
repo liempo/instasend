@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthRepository extends ChangeNotifier {
+class AuthRepository {
 
   // Save the firebase auth instance
   var _auth = FirebaseAuth.instance;
@@ -17,12 +16,14 @@ class AuthRepository extends ChangeNotifier {
   }) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+          email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password')
         return 'The password provided is too weak';
       else if (e.code == 'email-already-in-use')
         return 'The account already exists for that email';
+      else if (e.code == 'weak-password')
+        return 'the password is too weak.';
     } catch (e) { return e.toString(); }
 
     return 'success';
