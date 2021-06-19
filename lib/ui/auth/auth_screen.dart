@@ -29,9 +29,6 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
 
-  late final _provider = Provider
-    .of<AuthModel>(context, listen: false);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,8 +109,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 LoginForm(),
                 // Create an extension to LoginForm
                 TextButton(
-                  onPressed: () =>
-                    _provider.setTypeToRecover(),
+                  onPressed: value.isLoading ? null :
+                    () => value.setTypeToRecover(),
                   child: Text("Forgot password?")
                 )
               ],
@@ -146,7 +143,8 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
           // Hide when keyboard is visible
           child: TextButton(
-            onPressed: () => value.swap(),
+            onPressed: value.isLoading ? null :
+              () => value.swap(),
             child: Text(value.getAlternateButtonText())
           ),
         );
@@ -164,15 +162,24 @@ class _AuthScreenState extends State<AuthScreen> {
             horizontal: 32
           ),
           child: ElevatedButton(
-            onPressed: value.submit,
-            child: Text(
-              value.getPrimaryButtonText(),
-              style: Theme.of(context)
-                .primaryTextTheme.subtitle1
-            ),
+            onPressed: value.isLoading ?
+               null : value.submit,
+            child: value.isLoading ? child :
+              Text(
+                value.getPrimaryButtonText(),
+                style: Theme.of(context)
+                  .primaryTextTheme.subtitle1
+              ),
           )
         );
       },
+      child: Container(
+        width: 24, height: 24,
+        child: CircularProgressIndicator(
+          color: Theme.of(context)
+          .primaryIconTheme.color,
+        ),
+      ),
     );
   }
 

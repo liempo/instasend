@@ -17,6 +17,7 @@ class RegisterForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
+            enabled: !provider.isLoading,
             autocorrect: false,
             enableSuggestions: false,
             keyboardType: TextInputType.emailAddress,
@@ -29,6 +30,7 @@ class RegisterForm extends StatelessWidget {
           ),
           SizedBox(height: spacing),
           TextFormField(
+            enabled: !provider.isLoading,
             obscureText: true,
             decoration: InputDecoration(
               labelText: "Password",
@@ -39,6 +41,7 @@ class RegisterForm extends StatelessWidget {
           ),
           SizedBox(height: spacing),
           TextFormField(
+            enabled: !provider.isLoading,
             obscureText: true,
             decoration: InputDecoration(
               labelText: "Confirm Password",

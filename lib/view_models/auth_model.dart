@@ -9,12 +9,13 @@ class AuthModel extends ChangeNotifier {
 
   final _auth = repos<AuthRepository>();
 
+  // These are form contents which are
+  // unified across all forms
   String? _email;
   set email(String text)
     => _email = text;
   String? _errorEmail;
   get errorEmail => _errorEmail;
-
   String? _password;
   set password(String text)
     => _password = text;
@@ -24,6 +25,10 @@ class AuthModel extends ChangeNotifier {
   // Determines what form to show in the UI
   AuthType _type = AuthType.LOGIN;
   AuthType get type => _type;
+
+  // Binded to disable some widgets
+  bool _isLoading = false;
+  get isLoading => _isLoading;
 
   // Swaps forms depending on what's visible
   void swap() {
@@ -90,7 +95,6 @@ class AuthModel extends ChangeNotifier {
       _errorPassword = "Password cannot be empty";
     else _errorPassword = null;
 
-    notifyListeners();
 
     // NOTE: _errorPassword and _errorEmail being null
     // means they are valid and authentication is good to go
@@ -98,8 +102,16 @@ class AuthModel extends ChangeNotifier {
   }
 
   void submit() async {
-    if (!_checkFormValid())
+    // Set Widgets to loading state
+    _isLoading = true;
+
+    // Validate inputs
+    if (!_checkFormValid()) {
+      // Update error texts as well as loading state
+      _isLoading = false;
+      notifyListeners();
       return;
+    }
 
     // Add a ! notation because I know that these strings
     // are not null because of _checkFormValid()
@@ -126,6 +138,7 @@ class AuthModel extends ChangeNotifier {
 
     if (result != 'success')
       _errorEmail = result;
+    _isLoading = false;
     notifyListeners();
   }
 

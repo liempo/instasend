@@ -17,6 +17,7 @@ class LoginForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormField(
+            enabled: !provider.isLoading,
             autocorrect: false,
             enableSuggestions: false,
             keyboardType: TextInputType.emailAddress,
@@ -28,7 +29,8 @@ class LoginForm extends StatelessWidget {
               provider.email = text,
           ),
           SizedBox(height: spacing),
-          TextField(
+          TextFormField(
+            enabled: !provider.isLoading,
             obscureText: true,
             decoration: InputDecoration(
               labelText: "Password",

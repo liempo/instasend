@@ -23,6 +23,7 @@ class RecoverForm extends StatelessWidget {
               .textTheme.caption,
           ),
           TextFormField(
+            enabled: !provider.isLoading,
             autocorrect: false,
             enableSuggestions: false,
             keyboardType: TextInputType.emailAddress,
