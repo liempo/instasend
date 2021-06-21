@@ -1,24 +1,32 @@
-import 'profile_type.dart';
-
 class Profile {
 
-  final String name;
+  final String firstName;
+  final String lastName;
   final ProfileType type;
 
   Profile({
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.type
   });
 
   Profile.fromMap(Map<String, dynamic> map)
-    : this.name = map['name'],
+    : this.firstName = map['firstName'],
+      this.lastName = map['lastName'],
       this.type = map['type'];
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
+      'firstName': this.firstName,
+      'lastName': this.lastName,
       'type': this.type
     };
   }
 
+}
+
+enum ProfileType {
+  STANDARD,
+  BUSINESS,
+  RIDER
 }
