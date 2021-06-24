@@ -1,3 +1,5 @@
+import '/utils/string_extension.dart';
+
 class Profile {
 
   final String firstName;
@@ -29,4 +31,11 @@ enum ProfileType {
   STANDARD,
   BUSINESS,
   RIDER
+}
+
+extension ProfileTypeExtension on ProfileType {
+  String toBetterString() =>
+    toString().substring(
+       toString().indexOf('.') + 1
+    ).capitalize();
 }

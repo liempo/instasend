@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instasend/ui/auth/recover_form.dart';
 import 'package:provider/provider.dart';
 
 import '/models/auth_type.dart';
@@ -8,6 +7,8 @@ import '/utils/image_extension.dart';
 
 import 'login_form.dart';
 import 'register_form.dart';
+import 'profile_form.dart';
+import 'recover_form.dart';
 
 class AuthScreen extends StatefulWidget {
 
@@ -120,6 +121,8 @@ class _AuthScreenState extends State<AuthScreen> {
             form = RegisterForm(); break;
           case AuthType.RECOVER:
             form = RecoverForm(); break;
+          case AuthType.PROFILE:
+            form = ProfileForm(); break;
         }
 
         // Return the widget with padding
