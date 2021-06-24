@@ -11,11 +11,12 @@ class SplashModel extends ChangeNotifier {
   get isAuthenticated => _isAuthenticated;
 
   SplashModel() {
-    _auth.user.listen(_setAuthtenticated);
+    _auth.userStream.listen(_setAuthtenticated);
   }
 
   void _setAuthtenticated(user) {
     _isAuthenticated = user != null;
+    print("isAuthenticated = $isAuthenticated");
   }
 
 }

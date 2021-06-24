@@ -39,6 +39,7 @@ class _AuthScreenState extends State<AuthScreen> {
             _getImageHeader(),
             _getActiveForm(),
             Spacer(),
+            _getAuthenticationEror(),
             _getSubmitButton(),
             _getAlternateButton()
           ],
@@ -149,6 +150,26 @@ class _AuthScreenState extends State<AuthScreen> {
             onPressed: value.isLoading ? null :
               () => value.swap(),
             child: Text(value.getAlternateButtonText())
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _getAuthenticationEror() {
+    return Consumer<AuthModel>(
+      builder: (context, value, child) {
+        if (value.errorAuth == null)
+          return Container();
+        return Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            value.errorAuth,
+            style: Theme.of(context)
+              .textTheme.bodyText2!.copyWith(
+                color: Theme.of(context)
+                  .errorColor
+              ),
           ),
         );
       },

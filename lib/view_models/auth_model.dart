@@ -40,8 +40,12 @@ class AuthModel extends ChangeNotifier {
   get errorLastName => _errorLastName;
   ProfileType _profileType = ProfileType.STANDARD;
 
+  // Authentication message for errors and stuff
+  String? _errorAuth;
+  get errorAuth => _errorAuth;
+
   // Determines what form to show in the UI
-  AuthType _authType = AuthType.PROFILE;
+  AuthType _authType = AuthType.REGISTER;
   AuthType get type => _authType;
 
   // Binded to disable some widgets
@@ -57,20 +61,16 @@ class AuthModel extends ChangeNotifier {
   void setProfileType(String? text) {
     // Ignore call if text is null
     if (text == null) return;
-
-    for (var type in ProfileType.values) {
-      if (type.toBetterString() == text) {
-        _profileType = type; break;
-      }
-    }
-
+    _profileType = ProfileTypeExtension
+      .fromBetterString(text);
     notifyListeners();
   }
 
   // Get the list of profile as String
-  List<String> getProfileTypeList() => ProfileType.values.map((e) {
-    return e.toBetterString().capitalize();
-  }).toList();
+  List<String> getProfileTypeList() =>
+    ProfileType.values.map((e) {
+      return e.toBetterString().capitalize();
+    }).toList();
 
   // Swaps forms depending on what's visible
   void swap() {
@@ -88,6 +88,8 @@ class AuthModel extends ChangeNotifier {
     // Clear error text every time user swaps
     _errorEmail = null;
     _errorPassword = null;
+    _errorFirstName = null;
+    _errorLastName = null;
 
     notifyListeners();
   }
@@ -162,68 +164,113 @@ class AuthModel extends ChangeNotifier {
     return _errorEmail == null && _errorPassword == null;
   }
 
+  void _login() async {
+    final result = await _auth.login(
+      email: _email!, password: _password!);
+
+    // Update error msg if exist
+    if (result != 'success') {
+      _errorAuth = result;
+    }
+
+    // Check if user has created profile
+    else {
+      final profile = await _profiles
+        .getProfile(uid: _auth.user!.uid);
+      if (profile == null)
+        _authType = AuthType.PROFILE;
+    }
+
+    // TODO add route to home here
+    notifyListeners();
+  }
+
+  void _register() async {
+    final result = await _auth.register(
+      email: _email!, password: _password!);
+
+    // Update error msg if exist
+    if (result != 'success')
+      _errorAuth = result;
+    else
+      // Upadte form to show
+      _authType = AuthType.PROFILE;
+
+    notifyListeners();
+  }
+
+  void _recover() async {
+    final result = await _auth.recover(
+      email: _email!);
+    if (result != 'success')
+      _errorAuth = result;
+    // TODO add route to home here
+    notifyListeners();
+  }
+
+  void _createProfile() async {
+    // Do not proceed if no user signed in
+    if (_auth.user == null)
+      return;
+
+    final uid = _auth.user!.uid;
+    final result = await _profiles
+      .createProfile(
+      uid: uid,
+      profile: Profile(
+        firstName: _firstName!,
+        lastName: _lastName!,
+        type: _profileType
+      )
+    );
+    if (result != 'success')
+      _errorAuth = result;
+    // TODO add route to home here
+    notifyListeners();
+  }
+
   void submit() async {
+    // Return if called while loading
+    if (_isLoading) return;
+
+    // Reset error msgs
+    _errorAuth = null;
+
     // Set Widgets to loading state
     _isLoading = true;
 
+    // Update with pre
+    notifyListeners();
+
     // Validate inputs
     if (!_checkFormValid()) {
-      // Update error texts as well as loading state
       _isLoading = false;
+
+      // Update error texts (modified in _checkFormValid())
       notifyListeners();
       return;
     }
 
     // Create switch for firebase call
-    String result;
     switch (_authType) {
       case AuthType.LOGIN:
-        result = await _auth.login(
-          email: _email!,
-          password: _password!
-        ); break;
+        _login(); break;
       case AuthType.REGISTER:
-        result = await _auth.register(
-          email: _email!,
-          password: _password!
-        ); break;
+        _register(); break;
       case AuthType.RECOVER:
-        result = await _auth.recover(
-          email: _email!
-        ); break;
+        _recover(); break;
       case AuthType.PROFILE:
-        final uid = (await _auth.user.last)!.uid;
-
-        result = await _profiles
-          .createProfile(
-          uid: (await _auth.user.last)!.uid,
-          profile: Profile(
-            firstName: _firstName!,
-            lastName: _lastName!,
-            type: _profileType
-          )
-        ); break;
+        _createProfile(); break;
     }
 
-    // Update UI again if problem occurs
-    if (result != 'success')
-      _errorEmail = result;
-    _isLoading = false;
-    notifyListeners();
-
-    // Create another switch for routes
-    switch (_authType) {
-      case AuthType.LOGIN:
-        break;
-      case AuthType.REGISTER:
-        _authType = AuthType.PROFILE;
-        break;
-      case AuthType.RECOVER:
-        break;
-      case AuthType.PROFILE:
-        break;
-    }
-
+    // Delay turning off loading by 500ms
+    Future.delayed(
+      Duration(milliseconds: 500),
+        () {
+        _isLoading = false;
+        notifyListeners();
+      }
+    );
   }
 
 }

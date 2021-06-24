@@ -6,8 +6,11 @@ class AuthRepository {
   var _auth = FirebaseAuth.instance;
 
   // Using Stream to listen to Firebase user
-  Stream<User?> get user =>
+  Stream<User?> get userStream =>
     _auth.authStateChanges();
+
+  // Get Firebase user directly
+  User? get user => _auth.currentUser;
 
   // Create account using email and password
   Future<String> register({

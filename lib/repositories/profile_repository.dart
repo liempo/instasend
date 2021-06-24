@@ -21,4 +21,18 @@ class ProfileRepository {
     return 'success';
   }
 
+  Future<Profile?> getProfile({
+    required String uid
+  }) async {
+    try {
+      final snapshot = await _profiles
+        .doc(uid).get();
+      return Profile.fromMap(
+        snapshot.data()!);
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
 }
