@@ -15,13 +15,14 @@ class Profile {
   Profile.fromMap(Map<String, dynamic> map)
     : this.firstName = map['firstName'],
       this.lastName = map['lastName'],
-      this.type = map['type'];
+      this.type = ProfileTypeExtension
+        .fromBetterString(map["type"]);
 
   Map<String, dynamic> toMap() {
     return {
       'firstName': this.firstName,
       'lastName': this.lastName,
-      'type': this.type
+      'type': this.type.toBetterString()
     };
   }
 
@@ -34,8 +35,17 @@ enum ProfileType {
 }
 
 extension ProfileTypeExtension on ProfileType {
+
   String toBetterString() =>
     toString().substring(
        toString().indexOf('.') + 1
     ).capitalize();
+
+  static ProfileType fromBetterString(String text) {
+    for (var type in ProfileType.values)
+      if (type.toBetterString() == text)
+        return type;
+    throw Exception("ProfileType not found");
+  }
+
 }
