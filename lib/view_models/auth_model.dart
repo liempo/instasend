@@ -49,7 +49,8 @@ class AuthModel extends ChangeNotifier {
   get isLoading => _isLoading;
 
   // Get String formatted profileType
-  String get profileType => _profileType.toBetterString();
+  String? get profileType
+    => _profileType.toBetterString();
 
   // Search for name of type in ProfileType enum
   // NOTE: Needs to be declared as a func so it can be passed in onChanged
@@ -58,10 +59,12 @@ class AuthModel extends ChangeNotifier {
     if (text == null) return;
 
     for (var type in ProfileType.values) {
-      if (type.toString().contains(text.toLowerCase())) {
+      if (type.toBetterString() == text) {
         _profileType = type; break;
       }
     }
+
+    notifyListeners();
   }
 
   // Get the list of profile as String
@@ -132,8 +135,11 @@ class AuthModel extends ChangeNotifier {
     if (_authType == AuthType.PROFILE) {
       if (_firstName == null || _firstName == "")
         _errorFirstName = "First name cannot be empty";
+      else _errorFirstName = null;
+
       if (_lastName == null || _lastName == "")
         _errorLastName = "Last name cannot be empty";
+      else _errorLastName = null;
       // Do not check ProfileType because it defaults to STANDARD
 
       return _errorFirstName == null && _errorLastName == null;
@@ -186,6 +192,8 @@ class AuthModel extends ChangeNotifier {
           email: _email!
         ); break;
       case AuthType.PROFILE:
+        final uid = (await _auth.user.last)!.uid;
+
         result = await _profiles
           .createProfile(
           uid: (await _auth.user.last)!.uid,
@@ -208,7 +216,8 @@ class AuthModel extends ChangeNotifier {
       case AuthType.LOGIN:
         break;
       case AuthType.REGISTER:
-        _authType = AuthType.PROFILE; break;
+        _authType = AuthType.PROFILE;
+        break;
       case AuthType.RECOVER:
         break;
       case AuthType.PROFILE:

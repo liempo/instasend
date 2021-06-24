@@ -42,14 +42,18 @@ class ProfileForm extends StatelessWidget {
               provider.lastName = text
           ),
           SizedBox(height: spacing),
-          DropdownButton<String>(
+          DropdownButtonFormField(
             value: provider.profileType,
-            items: provider.getProfileTypeList().map((e) {
-                return DropdownMenuItem<String>(
+            items: provider.getProfileTypeList()
+              .map((e) {
+                return DropdownMenuItem(
                   value: e, child: Text(e)
                 );
               }).toList(),
             onChanged: provider.setProfileType,
+            decoration: InputDecoration(
+              labelText: "Profile Type"
+            ),
           )
         ],
       ),
