@@ -29,10 +29,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
         // Decide what screen to show based on state
         if (state == ConnectionState.done) {
 
-          // Setup the repository locator once
-          // firebase has been initialized
-          setupRepositoryLocator();
-
           // Show a screen based on authState
           return StreamBuilder(
             stream: repos<AuthRepository>().userStream,
