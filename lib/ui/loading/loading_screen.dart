@@ -28,7 +28,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
         // Decide what screen to show based on state
         if (state == ConnectionState.done) {
-
           // Show a screen based on authState
           return StreamBuilder(
             stream: repos<AuthRepository>().userStream,
@@ -38,7 +37,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
                AuthScreen.withViewModel();
             },
           );
-
         }
 
         // Show a blank page while firebase is initializing

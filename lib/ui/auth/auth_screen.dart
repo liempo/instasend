@@ -29,7 +29,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,6 +94,8 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getActiveForm() {
+    final size = MediaQuery
+      .of(context).size;
     return Consumer<AuthModel>(
       builder: (context, value, child) {
         // Create the form based on type
@@ -126,11 +127,16 @@ class _AuthScreenState extends State<AuthScreen> {
             form = ProfileForm(); break;
         }
 
+        // Add 15% padding to forms
+        final horizontalPadding =
+          size.width * 0.15;
+
         // Return the widget with padding
-        return  Container(
+        return Container(
           padding: EdgeInsets.only(
             top: _isKeyboardVisible() ? 4 : 24,
-            left: 48, right: 48
+            left: horizontalPadding,
+            right: horizontalPadding
           ),
           child: form,
         );
