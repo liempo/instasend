@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '/utils/constants.dart';
-import '/utils/repo_locator.dart';
-import '/ui/splash/splash_screen.dart';
+import 'ui/loading/loading_screen.dart';
 
 void main() {
-  // Setup the repository locator
-  setupRepositoryLocator();
 
   // Ensure bindings are initialized
   WidgetsFlutterBinding
@@ -16,19 +13,13 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Instasend',
       theme: lightTheme,
-      home: SplashScreen
-        .withViewModel()
+      home: LoadingScreen()
     );
   }
 }
