@@ -92,6 +92,7 @@ class AuthModel extends ChangeNotifier {
     _errorPassword = null;
     _errorFirstName = null;
     _errorLastName = null;
+    _errorAuth = null;
 
     notifyListeners();
   }
