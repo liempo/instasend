@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/ui/auth/auth_screen.dart';
-import '/utils/repo_locator.dart';
+import '/utils/locator.dart';
 import '/repositories/auth_repository.dart';
 
 class LoadingScreen extends StatefulWidget {

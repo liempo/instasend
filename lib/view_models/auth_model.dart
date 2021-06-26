@@ -4,7 +4,7 @@ import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
 import '/models/auth_type.dart';
 import '/models/profile.dart';
-import '/utils/repo_locator.dart';
+import '/utils/locator.dart';
 import '/utils/constants.dart';
 import '/utils/string_extension.dart';
 

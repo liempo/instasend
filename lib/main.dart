@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'ui/loading/loading_screen.dart';
 import '/utils/constants.dart';
-import '/utils/repo_locator.dart';
+import '/utils/locator.dart';
 
 void main() {
   // Setup the repository locator
