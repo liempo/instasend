@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/ui/auth/auth_screen.dart';
+import '/ui/home/home_screen.dart';
 import '/utils/locator.dart';
 import '/repositories/auth_repository.dart';
 
@@ -28,15 +29,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
         // Decide what screen to show based on state
         if (state == ConnectionState.done) {
+          final _auth = repos<AuthRepository>();
+
+          // Sign out every restart (DEBUG)
+          _auth.logout(); // WARN: THIS ON RELEASE
+
           // Show a screen based on authState
-          return StreamBuilder(
-            stream: repos<AuthRepository>().userStream,
-            builder: (context, AsyncSnapshot<User?> snapshot) {
-              return  (snapshot.data != null) ?
-               Container() : // TODO replace with HomeScreen
-               AuthScreen.withViewModel();
-            },
-          );
+          return (_auth.user != null) ?
+            HomeScreen() : // Attach view model
+            AuthScreen.withViewModel();
         }
 
         // Show a blank page while firebase is initializing

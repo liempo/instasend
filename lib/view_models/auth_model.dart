@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
+import '/services/nav_service.dart';
 import '/models/auth_type.dart';
 import '/models/profile.dart';
 import '/utils/locator.dart';
@@ -10,6 +11,7 @@ import '/utils/string_extension.dart';
 
 class AuthModel extends ChangeNotifier {
 
+  final _nav = services<NavigationService>();
   final _auth = repos<AuthRepository>();
   final _profiles = repos<ProfileRepository>();
 
@@ -168,21 +170,21 @@ class AuthModel extends ChangeNotifier {
     final result = await _auth.login(
       email: _email!, password: _password!);
 
-    // Update error msg if exist
-    if (result != 'success') {
-      _errorAuth = result;
-    }
-
-    // Check if user has created profile
-    else {
+    if (result == 'success') {
       final profile = await _profiles
         .getProfile(uid: _auth.user!.uid);
-      if (profile == null)
+
+      if (profile == null) {
         _authType = AuthType.PROFILE;
+        notifyListeners(); return;
+      }
+
+      _nav.pushReplacementNamed('home');
+    } else {
+      _errorAuth = result;
+      notifyListeners(); return;
     }
 
-    // TODO add route to home here
-    notifyListeners();
   }
 
   void _register() async {
@@ -204,7 +206,6 @@ class AuthModel extends ChangeNotifier {
       email: _email!);
     if (result != 'success')
       _errorAuth = result;
-    // TODO add route to home here
     notifyListeners();
   }
 
@@ -223,10 +224,13 @@ class AuthModel extends ChangeNotifier {
         type: _profileType
       )
     );
-    if (result != 'success')
+
+    if (result != 'success') {
       _errorAuth = result;
-    // TODO add route to home here
-    notifyListeners();
+      notifyListeners(); return;
+    }
+
+    _nav.pushReplacementNamed('home');
   }
 
   void submit() async {
