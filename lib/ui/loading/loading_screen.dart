@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '/ui/auth/auth_screen.dart';
 import '/ui/home/home_screen.dart';
@@ -30,9 +29,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
         // Decide what screen to show based on state
         if (state == ConnectionState.done) {
           final _auth = repos<AuthRepository>();
-
-          // Sign out every restart (DEBUG)
-          _auth.logout(); // WARN: THIS ON RELEASE
 
           // Show a screen based on authState
           return (_auth.user != null) ?
