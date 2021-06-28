@@ -44,7 +44,7 @@ class _ShopContentState extends State<ShopContent> {
           return Container();
 
         final list = snapshot.data
-          as List<dynamic>;
+          as List<CategortyItemViewModel>;
 
         // Define height here to avoid
         //errors when budiling the ListView

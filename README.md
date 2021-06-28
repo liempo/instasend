@@ -13,6 +13,3 @@ The project uses MVVM Architecture with the help of `provider` and `get_it` pack
  - `ui/` - All Flutter screens, widgets, and other UI related.
  - `utils/` - Themes, static function, constant variables and other helper clases.
 
-
-### Notes
- - I broke some MVVM rule here where the Views should not directly interact with the Models. I did so by requiring to pass a model to some deeply-nested widget to read data.  To be fair Flutter makes it hard to implement MVVM stuff.

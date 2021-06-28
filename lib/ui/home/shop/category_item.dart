@@ -1,13 +1,13 @@
-/// https://medium.com/fluttervn/how-to-make-blur-effect-in-flutter-using-backdropfilter-imagefilter-559ffd8ab73
+/// REFERENCE: https://t.co/sG0yLMJlM4
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-import '/models/category.dart';
+import '/view_models/shop_model.dart';
 
 class CategoryItem extends StatelessWidget {
 
-  final Category category;
-
+  final CategortyItemViewModel category;
   const CategoryItem({required this.category});
 
   @override
