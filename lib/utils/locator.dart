@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
+import '/repositories/shop_repository.dart';
 import '/services/nav_service.dart';
 
 // Objects here share the same instance
@@ -16,6 +17,8 @@ void setupRepositoryLocator() {
     () => AuthRepository());
   repos.registerLazySingleton(
     () => ProfileRepository());
+  repos.registerLazySingleton(
+    () => ShopRepository());
 }
 
 // Call on main.dart before building UI
