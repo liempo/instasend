@@ -4,60 +4,45 @@ import '/utils/image_extension.dart';
 
 class HomeAppBar extends StatelessWidget {
 
-  // Declare height variables for the widgets
-  // which will be used to compute offset
-  // to achieve a "hanging" search bar
-  final _searchBarHeight = 54.0;
-  late final _appBarHeight;
+  late final _expandedHeight;
   late final _backgroundHeight;
+  final _searchBarHeight = 54.0;
 
   @override
   Widget build(BuildContext context) {
-    // Set the appBarHeight to 20% of screen
-    _appBarHeight = MediaQuery.of(context)
-      .size.height * 0.2;
-    _backgroundHeight = _appBarHeight
-      - (_searchBarHeight / 2.0);
+    // Set the _expandedHeight to 20% of screen
+    _expandedHeight = (MediaQuery
+      .of(context).size.height * 0.2);
+    _backgroundHeight = _expandedHeight -
+      (_searchBarHeight / 2);
 
-    return SliverAppBar(
-      expandedHeight: _appBarHeight,
-      backgroundColor: Colors.transparent,
-      flexibleSpace: _getContent(context),
-    );
-  }
-
-  Widget _getContent(BuildContext context) {
-    // Wrap the stack in a container to
-    // be sure that the height is equals to
-    // the total height of the appBar.
-    return Container(
-      height: _appBarHeight,
-      child: Stack(
-        children: [
-          // Create the background
-          Positioned(
-            top: 0, left: 0, right: 0,
-            child: _getBackground(context)
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: SliverAppBar(
+        expandedHeight: _expandedHeight,
+        backgroundColor: Colors.transparent,
+        flexibleSpace: _getContent(context),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(
+            _searchBarHeight
           ),
-
-          Positioned(
-            bottom: _backgroundHeight / 2,
-            left: 32, right: 32,
-            child: _getGreeting(context)
-          ),
-
-          Positioned(
-            bottom: 0, left: 0, right: 0,
-            child: _getSearchBar(context)
-          )
-        ],
+          child: _getSearchBar(context)
+        ),
       ),
     );
   }
 
-  Container _getBackground(BuildContext context) {
+  Widget _getContent(BuildContext context) {
+    // Set the height slightly more to overlap
     return Container(
       height: _backgroundHeight,
+      padding: EdgeInsets.symmetric(
+        horizontal: 48.0
+      ),
+      child: Center(
+        child: _getGreeting(context)
+      ),
       decoration: BoxDecoration(
         color: Theme.of(context)
           .primaryColor,
@@ -84,7 +69,7 @@ class HomeAppBar extends StatelessWidget {
         Spacer(),
         Image.asset(
           'assets/logos/circle.png',
-          height: 48, width: 48
+          width: 48,
         ).withTint(
           color: Theme.of(context)
             .accentColor
@@ -95,7 +80,6 @@ class HomeAppBar extends StatelessWidget {
 
   Widget _getSearchBar(BuildContext context) {
     return Container(
-      height: _searchBarHeight,
       alignment: Alignment.bottomCenter,
       margin: EdgeInsets.symmetric(horizontal: 32),
       padding: EdgeInsets.symmetric(horizontal: 32),
