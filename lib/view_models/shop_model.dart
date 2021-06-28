@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+
+import 'package:flutter/widgets.dart';
 
 import '/utils/locator.dart';
 import '/repositories/shop_repository.dart';

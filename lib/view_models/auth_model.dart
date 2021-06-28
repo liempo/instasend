@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
