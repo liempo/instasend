@@ -32,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
           // Show a screen based on authState
           return (_auth.user != null) ?
-            HomeScreen() : // Attach view model
+            HomeScreen.withViewModel() :
             AuthScreen.withViewModel();
         }
 

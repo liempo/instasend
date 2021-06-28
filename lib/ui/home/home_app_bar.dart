@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '/view_models/home_model.dart';
 import '/utils/image_extension.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -12,7 +14,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     // Set the _expandedHeight to 20% of screen
     _expandedHeight = (MediaQuery
-      .of(context).size.height * 0.2);
+      .of(context).size.height * 0.25);
     _backgroundHeight = _expandedHeight -
       (_searchBarHeight / 2);
 
@@ -55,16 +57,32 @@ class HomeAppBar extends StatelessWidget {
   }
 
   Widget _getGreeting(BuildContext context) {
+    // Get the instance of HomeModel
+    final provider = Provider
+      .of<HomeModel>(context, listen: false);
+
     return Row(
       children: [
-        Text(
-          "Welcome",
-          style: Theme.of(context)
-          .primaryTextTheme
-          .headline5!
-          .copyWith(
-            fontWeight: FontWeight.bold
-          )
+        StreamBuilder(
+          stream: provider.currentProfileFirstName,
+          builder: (context, snapshot) {
+            // Get the string data from snapshot
+            String firstName =
+              snapshot.data.toString();
+
+            return SizedBox(
+              width: 196,
+              child: Text(
+                "Hello $firstName",
+                style: Theme.of(context)
+                .primaryTextTheme
+                .headline5!
+                .copyWith(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            );
+          },
         ),
         Spacer(),
         Image.asset(

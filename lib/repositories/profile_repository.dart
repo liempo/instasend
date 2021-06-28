@@ -35,4 +35,13 @@ class ProfileRepository {
     }
   }
 
+  Stream<Profile> getProfileStream({
+    required String uid
+  }) {
+    return _profiles.doc(uid).snapshots().map(
+      (snapshots) => Profile
+        .fromMap(snapshots.data()!)
+    );
+  }
+
 }
