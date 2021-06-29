@@ -38,6 +38,9 @@ dependencies:
   firebase_auth: ^1.4.1
   cloud_firestore: ^2.2.2
 
+  # Map and location tools
+  location: ^4.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
