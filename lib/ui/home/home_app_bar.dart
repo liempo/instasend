@@ -112,8 +112,8 @@ class HomeAppBar extends StatelessWidget {
   }
 
   Widget _getAddressText(BuildContext context) {
-    return FutureBuilder(
-      future: _provider.currentAddress.first,
+    return StreamBuilder(
+      stream: _provider.currentAddress,
       builder: (context, snapshot) {
         String text = snapshot.hasData ?
           snapshot.data.toString() :
