@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '/view_models/home_model.dart';
 import '/utils/image_extension.dart';
+import '/utils/constants.dart';
 
 class HomeAppBar extends StatelessWidget {
 
@@ -58,8 +59,10 @@ class HomeAppBar extends StatelessWidget {
         color: Theme.of(context)
           .primaryColor,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(32),
-          bottomRight: Radius.circular(32),
+          bottomLeft: Radius.circular(
+            headerBorderRadius),
+          bottomRight: Radius.circular(
+            headerBorderRadius),
         )
       ),
     );

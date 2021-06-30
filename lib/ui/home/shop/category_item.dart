@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '/view_models/shop_model.dart';
+import '/utils/constants.dart';
 
 class CategoryItem extends StatelessWidget {
 
@@ -18,7 +19,8 @@ class CategoryItem extends StatelessWidget {
       width: 128,
       margin: EdgeInsets.all(8),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius
+          .circular(cardBorderRadius),
         child: BackdropFilter(
           filter: ImageFilter.blur(
             sigmaX: 1.0, sigmaY: 1.0,
@@ -43,7 +45,8 @@ class CategoryItem extends StatelessWidget {
           image: NetworkImage(category.imageUrl),
           fit: BoxFit.cover
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius
+          .circular(cardBorderRadius),
         boxShadow: [
           BoxShadow(
             offset: Offset(0, 0),

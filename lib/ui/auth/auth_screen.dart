@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '/models/auth_type.dart';
 import '/view_models/auth_model.dart';
 import '/utils/image_extension.dart';
+import '/utils/constants.dart';
 
 import 'login_form.dart';
 import 'register_form.dart';
@@ -48,7 +49,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getImageHeader() {
-    final radius = Radius.circular(32);
+    final radius = Radius.circular(headerBorderRadius);
     return Container(
       padding: EdgeInsets.only(
         top: 32, left: 64, right: 64

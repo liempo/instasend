@@ -26,5 +26,8 @@ final lightTheme = ThemeData(
   )
 );
 
+final headerBorderRadius = 32.0;
+final cardBorderRadius = 12.0;
+
 final emailRegex = RegExp(
   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
