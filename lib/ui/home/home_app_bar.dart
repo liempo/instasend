@@ -6,12 +6,21 @@ import '/utils/image_extension.dart';
 
 class HomeAppBar extends StatelessWidget {
 
+  // Get the instance of HomeModel
+  late final HomeModel _provider;
+
   late final _expandedHeight;
   late final _backgroundHeight;
+
   final _searchBarHeight = 54.0;
+  final _textMaxWidth = 196.0;
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the provider object
+    _provider = Provider.of<HomeModel>(
+      context, listen: false);
+
     // Set the _expandedHeight to 20% of screen
     _expandedHeight = (MediaQuery
       .of(context).size.height * 0.25);
@@ -24,7 +33,7 @@ class HomeAppBar extends StatelessWidget {
       child: SliverAppBar(
         expandedHeight: _expandedHeight,
         backgroundColor: Colors.transparent,
-        flexibleSpace: _getContent(context),
+        flexibleSpace: _getFlexibleSpace(context),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(
             _searchBarHeight
@@ -35,7 +44,7 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 
-  Widget _getContent(BuildContext context) {
+  Widget _getFlexibleSpace(BuildContext context) {
     // Set the height slightly more to overlap
     return Container(
       height: _backgroundHeight,
@@ -43,7 +52,7 @@ class HomeAppBar extends StatelessWidget {
         horizontal: 48.0
       ),
       child: Center(
-        child: _getGreeting(context)
+        child: _getContent(context)
       ),
       decoration: BoxDecoration(
         color: Theme.of(context)
@@ -56,33 +65,16 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 
-  Widget _getGreeting(BuildContext context) {
-    // Get the instance of HomeModel
-    final provider = Provider
-      .of<HomeModel>(context, listen: false);
-
+  Widget _getContent(BuildContext context) {
     return Row(
       children: [
-        StreamBuilder(
-          stream: provider.currentProfileFirstName,
-          builder: (context, snapshot) {
-            // Get the string data from snapshot
-            String firstName =
-              snapshot.data.toString();
-
-            return SizedBox(
-              width: 196,
-              child: Text(
-                "Hello $firstName",
-                style: Theme.of(context)
-                .primaryTextTheme
-                .headline5!
-                .copyWith(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-            );
-          },
+        Column(
+          mainAxisAlignment:
+            MainAxisAlignment.center,
+          children: [
+            _getGreetingText(context),
+            _getAddressText(context)
+          ],
         ),
         Spacer(),
         Image.asset(
@@ -93,6 +85,49 @@ class HomeAppBar extends StatelessWidget {
             .accentColor
         )
       ],
+    );
+  }
+
+  Widget _getGreetingText(BuildContext context) {
+    return StreamBuilder(
+      stream: _provider.firstNameStream,
+      builder: (context, snapshot) {
+        // Get the string data from snapshot
+        String firstName =
+          snapshot.data.toString();
+        return Container(
+          width: _textMaxWidth,
+          child: Text(
+            "Hello $firstName",
+            style: Theme.of(context)
+            .primaryTextTheme
+            .headline5!
+            .copyWith(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _getAddressText(BuildContext context) {
+    return FutureBuilder(
+      future: _provider.currentAddress.first,
+      builder: (context, snapshot) {
+        String text = snapshot.hasData ?
+          snapshot.data.toString() :
+          "Getting you current location";
+        return SizedBox(
+          width: _textMaxWidth,
+          child: Text(
+            text,
+            style: Theme.of(context)
+              .primaryTextTheme
+              .subtitle1
+          )
+        );
+      },
     );
   }
 

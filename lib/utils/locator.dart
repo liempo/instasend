@@ -4,6 +4,7 @@ import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
 import '/repositories/shop_repository.dart';
 import '/services/nav_service.dart';
+import '/services/location_service.dart';
 
 // Objects here share the same instance
 // but I prefer to declare it as a different
@@ -25,4 +26,6 @@ void setupRepositoryLocator() {
 void setupServiceLocator() {
   services.registerLazySingleton(
     () => NavigationService());
+  services.registerLazySingleton(
+    () => LocationService());
 }
