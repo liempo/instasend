@@ -46,8 +46,8 @@ class CategoryItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 12),
-            blurRadius: 12,
+            offset: Offset(0, 0),
+            blurRadius: 24,
             color: Theme.of(context)
               .accentColor
               .withOpacity(0.25)
