@@ -17,7 +17,9 @@ class CategoryItem extends StatelessWidget {
       // Height matches parent
       // But the width is fixed
       width: 128,
-      margin: EdgeInsets.all(8),
+      // Margins per item should only
+      // include the spacing they need
+      margin: EdgeInsets.symmetric(horizontal: 8),
       child: ClipRRect(
         borderRadius: BorderRadius
           .circular(cardBorderRadius),

@@ -2,6 +2,7 @@
 import 'package:flutter/widgets.dart';
 
 import '/repositories/shop_repository.dart';
+import '/models/shop.dart';
 import '/models/category.dart';
 import '/utils/locator.dart';
 
@@ -9,10 +10,16 @@ class ShopModel extends ChangeNotifier {
 
   final _shops = repos<ShopRepository>();
 
-  // Transform this stream into a view model
+  // Transform these streams into a view model
   get categories => _shops.getShopCategories()
     .map((list) => list.map(
         (e) => CategortyItemViewModel(e)
+      ).toList()
+    );
+
+  get shops => _shops.getShops()
+    .map((list) => list.map(
+        (e) => ShopItemViewModel(e)
       ).toList()
     );
 
@@ -26,5 +33,18 @@ class CategortyItemViewModel {
   CategortyItemViewModel(Category category) :
     this.name = category.name,
     this.imageUrl = category.imageUrl;
+
+}
+
+class ShopItemViewModel {
+
+  final String imageUrl;
+  final String name;
+  final double rating;
+
+  ShopItemViewModel(Shop shop) :
+    this.imageUrl = shop.imageUrl,
+    this.name = shop.name,
+    this.rating = shop.rating;
 
 }
