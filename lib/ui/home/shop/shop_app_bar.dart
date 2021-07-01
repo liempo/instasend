@@ -99,7 +99,7 @@ class HomeAppBar extends StatelessWidget {
             "Hello $firstName",
             style: Theme.of(context)
             .primaryTextTheme
-            .headline5!
+            .headline4!
             .copyWith(
               fontWeight: FontWeight.bold
             ),
