@@ -37,13 +37,16 @@ class MyApp extends StatelessWidget {
   Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case 'auth': return MaterialPageRoute(
-        builder: (context) => AuthScreen());
+        builder: (context) => AuthScreen
+        .withViewModel());
       case 'home': return MaterialPageRoute(
-        builder: (context) => HomeScreen());
+        builder: (context) => HomeScreen
+        .withViewModel());
 
       // Defaults to login screen
       default: return MaterialPageRoute(
-        builder: (context) => AuthScreen());
+        builder: (context) => AuthScreen
+          .withViewModel());
     }
   }
 
