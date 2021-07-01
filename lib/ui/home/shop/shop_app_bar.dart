@@ -7,20 +7,13 @@ import '/utils/constants.dart';
 
 class HomeAppBar extends StatelessWidget {
 
-  // Get the instance of HomeModel
-  late final HomeModel _provider;
-
   late final _expandedHeight;
   late final _backgroundHeight;
-
   final _searchBarHeight = 54.0;
   final _textMaxWidth = 196.0;
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the provider object
-    _provider = Provider.of<HomeModel>(
-      context, listen: false);
 
     // Set the _expandedHeight to 20% of screen
     _expandedHeight = (MediaQuery
@@ -92,8 +85,10 @@ class HomeAppBar extends StatelessWidget {
   }
 
   Widget _getGreetingText(BuildContext context) {
+    final provider = Provider
+      .of<HomeModel>(context, listen: false);
     return StreamBuilder(
-      stream: _provider.firstNameStream,
+      stream: provider.firstNameStream,
       builder: (context, snapshot) {
         // Get the string data from snapshot
         String firstName =
@@ -115,8 +110,11 @@ class HomeAppBar extends StatelessWidget {
   }
 
   Widget _getAddressText(BuildContext context) {
+    final provider = Provider
+      .of<HomeModel>(context,
+        listen: false);
     return StreamBuilder(
-      stream: _provider.currentAddress,
+      stream: provider.currentAddress,
       builder: (context, snapshot) {
         String text = snapshot.hasData ?
           snapshot.data.toString() :

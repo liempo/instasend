@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '/view_models/shop_model.dart';
 
+import 'shop_app_bar.dart';
 import 'category_item.dart';
 import 'shop_item.dart';
 
@@ -23,15 +24,22 @@ class ShopContent extends StatefulWidget {
 class _ShopContentState extends State<ShopContent> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment:
-        CrossAxisAlignment.start,
-      mainAxisAlignment:
-        MainAxisAlignment.start,
-      children: [
-        _getCategoryGroup(),
-        _getPopularGroup()
-      ]
+    return CustomScrollView(
+      slivers: [
+        HomeAppBar(),
+        SliverFillRemaining(
+          child: Column(
+            crossAxisAlignment:
+              CrossAxisAlignment.start,
+            mainAxisAlignment:
+              MainAxisAlignment.start,
+            children: [
+              _getCategoryGroup(),
+              _getPopularGroup()
+            ]
+          )
+        )
+      ],
     );
   }
 

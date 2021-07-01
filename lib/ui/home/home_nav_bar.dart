@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '/view_models/home_model.dart';
 
 class HomeNavBar extends StatelessWidget {
   @override
@@ -16,22 +19,27 @@ class HomeNavBar extends StatelessWidget {
           )
         ]
       ),
-      child: BottomNavigationBar(
-        elevation: 0,
-        items: [
-          BottomNavigationBarItem(
-            label: "Shop",
-            icon: Icon(Icons.store),
+      child: Consumer<HomeModel>(
+        builder: (context, value, child) =>
+          BottomNavigationBar(
+            currentIndex: value.stateIndex,
+            onTap: value.setStateByIndex,
+            elevation: 0,
+            items: [
+              BottomNavigationBarItem(
+                label: "Shop",
+                icon: Icon(Icons.store),
+              ),
+              BottomNavigationBarItem(
+                label: "Delivery",
+                icon: Icon(Icons.delivery_dining),
+              ),
+              BottomNavigationBarItem(
+                label: "Profile",
+                icon: Icon(Icons.person),
+              ),
+            ]
           ),
-          BottomNavigationBarItem(
-            label: "Delivery",
-            icon: Icon(Icons.delivery_dining),
-          ),
-          BottomNavigationBarItem(
-            label: "Profile",
-            icon: Icon(Icons.person),
-          ),
-        ]
       ),
     );
   }

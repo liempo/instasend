@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:instasend/models/home_state.dart';
 
 import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
@@ -18,5 +19,16 @@ class HomeModel extends ChangeNotifier {
   Stream<String> get currentAddress => _loc
     .getCurrentLocalityStream()
     .map((data) => "$data");
+
+  HomeState _state = HomeState.SHOP;
+  HomeState get state => _state;
+  get stateIndex => HomeState.values.indexOf(_state);
+
+  void setStateByIndex(int index) {
+    _state = HomeState
+      .values.elementAt(index);
+    notifyListeners();
+  }
+
 
 }
