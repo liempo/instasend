@@ -199,7 +199,11 @@ class _AuthScreenState extends State<AuthScreen> {
               Text(
                 value.getPrimaryButtonText(),
                 style: Theme.of(context)
-                  .primaryTextTheme.subtitle1
+                  .primaryTextTheme
+                  .subtitle1!
+                  .copyWith(
+                    fontWeight: FontWeight.bold
+                  )
               ),
           )
         );
