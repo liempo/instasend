@@ -41,6 +41,7 @@ dependencies:
   # Map and location tools
   location: ^4.3.0
   geocoding: ^2.0.0
+  google_maps_flutter: ^2.0.6
 
 dev_dependencies:
   flutter_test:

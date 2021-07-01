@@ -3,6 +3,13 @@
    <application
         android:label="instasend"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- google_api_key will be automatically generated with
+        google-services.json if you use google-play gradle plugin
+        https://stackoverflow.com/a/63810489 -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+          android:value="@string/google_api_key"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
