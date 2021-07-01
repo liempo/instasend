@@ -89,4 +89,5 @@ class ShopItem extends StatelessWidget {
       ),
     );
   }
+
 }

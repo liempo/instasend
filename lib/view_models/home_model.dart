@@ -30,5 +30,4 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
 }

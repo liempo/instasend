@@ -16,7 +16,6 @@ class HomeAppBar extends StatelessWidget {
     // Compute expanded height of appBar
     final height = MediaQuery.of(context)
       .size.height * _expandedHeightPercent;
-
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -186,4 +185,5 @@ class HomeAppBar extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -10,7 +10,6 @@ class LoginForm extends StatelessWidget {
     final provider = Provider
       .of<AuthModel>(context);
     double spacing = 18;
-
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

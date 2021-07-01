@@ -9,6 +9,7 @@ import 'category_item.dart';
 import 'shop_item.dart';
 
 class ShopPage extends StatefulWidget {
+
   @override
   _ShopPageState createState()
     => _ShopPageState();
@@ -19,9 +20,11 @@ class ShopPage extends StatefulWidget {
       builder: (context, child) => ShopPage()
     );
   }
+
 }
 
 class _ShopPageState extends State<ShopPage> {
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
