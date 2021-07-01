@@ -120,11 +120,26 @@ class HomeAppBar extends StatelessWidget {
           "Getting you current location";
         return SizedBox(
           width: _textMaxWidth,
-          child: Text(
-            text,
-            style: Theme.of(context)
-              .primaryTextTheme
-              .subtitle1
+          child:  RichText(
+            text: TextSpan(
+              children: [
+                WidgetSpan(
+                  child: Icon(
+                    Icons.location_pin,
+                    size: 18,
+                    color: Theme.of(context)
+                      .primaryIconTheme
+                      .color
+                  ),
+                ),
+                TextSpan(
+                  text: text,
+                  style: Theme.of(context)
+                    .primaryTextTheme
+                    .subtitle2
+                )
+              ]
+            )
           )
         );
       },
