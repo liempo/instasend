@@ -14,12 +14,6 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   return Container(
-      // Height matches parent
-      // But the width is fixed
-      width: 128,
-      // Margins per item should only
-      // include the spacing they need
-      margin: EdgeInsets.symmetric(horizontal: 8),
       child: ClipRRect(
         borderRadius: BorderRadius
           .circular(cardBorderRadius),
@@ -51,11 +45,11 @@ class CategoryItem extends StatelessWidget {
           .circular(cardBorderRadius),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 0),
-            blurRadius: 24,
+            offset: Offset(0, 4),
+            blurRadius: 8,
             color: Theme.of(context)
               .accentColor
-              .withOpacity(0.25)
+              .withOpacity(0.5)
           )
         ]
       ),

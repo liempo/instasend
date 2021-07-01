@@ -35,7 +35,7 @@ class _ShopPageState extends State<ShopPage> {
               MainAxisAlignment.start,
             children: [
               _getCategoryGroup(),
-              _getPopularGroup()
+              _getPopularGroup(),
             ]
           )
         )
@@ -47,31 +47,44 @@ class _ShopPageState extends State<ShopPage> {
     // Get provider here to access the category stream
     final provider = Provider
       .of<ShopModel>(context, listen: false);
-    return StreamBuilder(
-      stream: provider.categories,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData)
-          return Container();
-        final list = snapshot.data
-          as List<CategortyItemViewModel>;
 
-        // Define height here to avoid
-        //errors when budiling the ListView
-        return Container(
-          height: 72,
-          // Margin for the spacing on the column
-          margin: EdgeInsets.only(top: 24),
-          child: ListView.builder(
+    // Calculate the dimensions and size here
+    final size = MediaQuery.of(context).size;
+    final itemWidth = size.width * 0.35;
+    final itemHeight = size.height * 0.10;
+
+    return Container(
+      // Define height here to avoid
+      //errors when budiling the ListView
+      height: itemHeight,
+      // Margin for the spacing on the column
+      margin: EdgeInsets.only(top: 24),
+      child: StreamBuilder(
+        stream: provider.categories,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData)
+            return Container();
+          final list = snapshot.data
+            as List<CategortyItemViewModel>;
+          return ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: list.length,
             itemBuilder: (context, index) {
-              return CategoryItem(
-                category: list[index]
+              // Apply categoryItem dimensions
+              return Container(
+                width: itemWidth,
+                padding: EdgeInsets
+                  .only(bottom: 12),
+                margin: EdgeInsets
+                  .symmetric(horizontal: 4),
+                child: CategoryItem(
+                  category: list[index]
+                ),
               );
             },
-          ),
-        );
-      }
+          );
+        }
+      ),
     );
   }
 
@@ -79,44 +92,52 @@ class _ShopPageState extends State<ShopPage> {
     // Get provider here to access the shops stream
     final provider = Provider
       .of<ShopModel>(context, listen: false);
+
+    // Calculate the dimensions and size here
+    final size = MediaQuery.of(context).size;
+    final itemWidth = size.width * 0.50;
+    final itemHeight = size.height * 0.20;
+
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         _createGroupTitle(
           title: "Popular Near You",
           onPressed: () {}
         ),
-        StreamBuilder(
-          stream: provider.shops,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return Container();
-            final list = snapshot.data
-              as List<ShopItemViewModel>;
-
-            // Define height here to avoid
-            //errors when budiling the ListView
-            return Container(
-              height: 172,
-              width: double.infinity,
-              child: ListView.builder(
+        Container(
+          // Define height here to avoid errors
+          // when budiling the ListView
+          height: itemHeight,
+          child: StreamBuilder(
+            stream: provider.shops,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData)
+                return Container();
+              final list = snapshot.data
+                as List<ShopItemViewModel>;
+              return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: list.length,
                 itemBuilder: (context, index) {
-                  // Wrap with align to avoid
-                  // the items from expanding
-                  // the listView's parent
-                  return Align(
+                  // Apply dimensions for each ShopItem
+                  return Container(
+                    width: itemWidth,
+                    height: itemHeight,
+                    padding: EdgeInsets
+                      .symmetric(vertical: 8),
+                    margin: EdgeInsets
+                      .symmetric(horizontal: 8),
                     alignment: Alignment.topCenter,
                     child: ShopItem(
                       shop: list[index]
                     ),
                   );
                 },
-              ),
-            );
-
-          },
-        )
+              );
+            },
+          )
+        ),
       ],
     );
   }

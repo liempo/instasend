@@ -7,19 +7,12 @@ class ShopItem extends StatelessWidget {
 
   final ShopItemViewModel shop;
 
-  ShopItem({required this.shop});
+  ShopItem({ required this.shop });
 
   @override
   Widget build(BuildContext context) {
-   return Container(
-      // Set the width to 50% of the parent
-      width: MediaQuery.of(context)
-        .size.width * .50,
-      // Margins per item should only
-      // include the spacing they need
-      margin: EdgeInsets.symmetric(horizontal: 8),
+    return Container(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           _getShopImage(context),
           _getShopDetails(context)
@@ -31,7 +24,6 @@ class ShopItem extends StatelessWidget {
           .circular(cardBorderRadius),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 2),
             blurRadius: 8,
             color: Theme.of(context)
               .accentColor
@@ -49,8 +41,14 @@ class ShopItem extends StatelessWidget {
         mainAxisAlignment:
           MainAxisAlignment.center,
         children: [
-          Text(shop.name),
-          Spacer(),
+          Expanded(
+            child: Text(
+              shop.name,
+              maxLines: 1,
+            overflow: TextOverflow.fade,
+            softWrap: false,
+            ),
+          ),
           RichText(
             text: TextSpan(
               style: TextStyle(
@@ -75,13 +73,19 @@ class ShopItem extends StatelessWidget {
   }
 
   Widget _getShopImage(BuildContext context) {
-    return ClipRRect(
-      child: Image.network(shop.imageUrl),
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(
-          cardBorderRadius),
-        topRight: Radius.circular(
-          cardBorderRadius)
+    return Expanded(
+      child: ClipRRect(
+        child: Image.network(
+          shop.imageUrl,
+          width: double.infinity,
+          fit: BoxFit.cover
+        ),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            cardBorderRadius),
+          topRight: Radius.circular(
+            cardBorderRadius)
+        ),
       ),
     );
   }
