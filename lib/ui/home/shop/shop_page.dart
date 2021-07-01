@@ -58,7 +58,7 @@ class _ShopPageState extends State<ShopPage> {
         // Define height here to avoid
         //errors when budiling the ListView
         return Container(
-          height: 96, width: double.infinity,
+          height: 72,
           // Margin for the spacing on the column
           margin: EdgeInsets.only(top: 24),
           child: ListView.builder(
@@ -79,43 +79,45 @@ class _ShopPageState extends State<ShopPage> {
     // Get provider here to access the shops stream
     final provider = Provider
       .of<ShopModel>(context, listen: false);
-    return Container(
-      child: Column(
-        crossAxisAlignment:
-          CrossAxisAlignment.start,
-        children: [
-          _createGroupTitle(
-            title: "Popular Near You",
-            onPressed: () {}
-          ),
-          StreamBuilder(
-            stream: provider.shops,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData)
-                return Container();
-              final list = snapshot.data
-                as List<ShopItemViewModel>;
+    return Column(
+      children: [
+        _createGroupTitle(
+          title: "Popular Near You",
+          onPressed: () {}
+        ),
+        StreamBuilder(
+          stream: provider.shops,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return Container();
+            final list = snapshot.data
+              as List<ShopItemViewModel>;
 
-              // Define height here to avoid
-              //errors when budiling the ListView
-              return Container(
-                height: 196,
-                width: double.infinity,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return ShopItem(
+            // Define height here to avoid
+            //errors when budiling the ListView
+            return Container(
+              height: 172,
+              width: double.infinity,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  // Wrap with align to avoid
+                  // the items from expanding
+                  // the listView's parent
+                  return Align(
+                    alignment: Alignment.topCenter,
+                    child: ShopItem(
                       shop: list[index]
-                    );
-                  },
-                ),
-              );
+                    ),
+                  );
+                },
+              ),
+            );
 
-            },
-          )
-        ],
-      ),
+          },
+        )
+      ],
     );
   }
 
@@ -124,9 +126,8 @@ class _ShopPageState extends State<ShopPage> {
     Function()? onPressed
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 16, vertical: 8
-      ),
+      height: 32, // Set a fixed height
+      margin: EdgeInsets.all(16),
       child: Row(
         children: [
           Text(

@@ -12,13 +12,16 @@ class ShopItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    return Container(
-      width: 224,
+      // Set the width to 50% of the parent
+      width: MediaQuery.of(context)
+        .size.width * .50,
       // Margins per item should only
       // include the spacing they need
       margin: EdgeInsets.symmetric(horizontal: 8),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          _getShopImage(),
+          _getShopImage(context),
           _getShopDetails(context)
         ],
       ),
@@ -28,11 +31,11 @@ class ShopItem extends StatelessWidget {
           .circular(cardBorderRadius),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 12),
-            blurRadius: 12,
+            offset: Offset(0, 2),
+            blurRadius: 8,
             color: Theme.of(context)
               .accentColor
-              .withOpacity(0.25)
+              .withOpacity(0.75)
           )
         ]
       ),
@@ -41,7 +44,7 @@ class ShopItem extends StatelessWidget {
 
   Widget _getShopDetails(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment:
           MainAxisAlignment.center,
@@ -52,8 +55,7 @@ class ShopItem extends StatelessWidget {
             text: TextSpan(
               style: TextStyle(
                 color: Theme.of(context)
-                  .primaryColor
-                  .withOpacity(0.5)
+                  .primaryColorLight
               ),
               children: [
                 WidgetSpan(
@@ -72,7 +74,7 @@ class ShopItem extends StatelessWidget {
     );
   }
 
-  Widget _getShopImage() {
+  Widget _getShopImage(BuildContext context) {
     return ClipRRect(
       child: Image.network(shop.imageUrl),
       borderRadius: BorderRadius.only(
