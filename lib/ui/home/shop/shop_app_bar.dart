@@ -7,25 +7,22 @@ import '/utils/constants.dart';
 
 class HomeAppBar extends StatelessWidget {
 
-  late final _expandedHeight;
-  late final _backgroundHeight;
+  final _expandedHeightPercent = 0.25;
   final _searchBarHeight = 54.0;
   final _textMaxWidth = 196.0;
 
   @override
   Widget build(BuildContext context) {
-
-    // Set the _expandedHeight to 20% of screen
-    _expandedHeight = (MediaQuery
-      .of(context).size.height * 0.25);
-    _backgroundHeight = _expandedHeight -
-      (_searchBarHeight / 2);
+    // Compute expanded height of appBar
+    final height = MediaQuery.of(context)
+      .size.height * _expandedHeightPercent;
 
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
       child: SliverAppBar(
-        expandedHeight: _expandedHeight,
+        // Get 20% of the total height
+        expandedHeight: height,
         backgroundColor: Colors.transparent,
         flexibleSpace: _getFlexibleSpace(context),
         bottom: PreferredSize(
@@ -39,9 +36,11 @@ class HomeAppBar extends StatelessWidget {
   }
 
   Widget _getFlexibleSpace(BuildContext context) {
-    // Set the height slightly more to overlap
+    // Set the height slightly less than expandedHeight
+    final height =  (MediaQuery.of(context).size.height
+      * _expandedHeightPercent) - (_searchBarHeight / 2);
     return Container(
-      height: _backgroundHeight,
+      height: height,
       padding: EdgeInsets.symmetric(
         horizontal: 48.0
       ),
