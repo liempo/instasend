@@ -5,7 +5,7 @@ import '/models/home_state.dart';
 import '/view_models/home_model.dart';
 
 import 'home_nav_bar.dart';
-import 'shop/shop_content.dart';
+import 'shop/shop_page.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -19,17 +19,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _getActiveContent(context),
+      body: _getActivePage(context),
       bottomNavigationBar: HomeNavBar(),
     );
   }
 
-  Widget _getActiveContent(BuildContext context) {
+  Widget _getActivePage(BuildContext context) {
     return Consumer<HomeModel>(
       builder: (context, value, child) {
         switch (value.state) {
           case HomeState.SHOP:
-            return ShopContent.withViewModel();
+            return ShopPage.withViewModel();
           case HomeState.DELIVERY:
             return Scaffold();
           case HomeState.PROFILE:

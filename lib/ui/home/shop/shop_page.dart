@@ -8,20 +8,20 @@ import 'shop_app_bar.dart';
 import 'category_item.dart';
 import 'shop_item.dart';
 
-class ShopContent extends StatefulWidget {
+class ShopPage extends StatefulWidget {
   @override
-  _ShopContentState createState()
-    => _ShopContentState();
+  _ShopPageState createState()
+    => _ShopPageState();
 
   static Widget withViewModel() {
     return ChangeNotifierProvider(
       create: (context) => ShopModel(),
-      builder: (context, child) => ShopContent()
+      builder: (context, child) => ShopPage()
     );
   }
 }
 
-class _ShopContentState extends State<ShopContent> {
+class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
