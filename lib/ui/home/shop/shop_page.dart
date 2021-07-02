@@ -29,13 +29,9 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        HomeAppBar(),
+        ShopAppBar(),
         SliverFillRemaining(
-          child: Column(
-            crossAxisAlignment:
-              CrossAxisAlignment.start,
-            mainAxisAlignment:
-              MainAxisAlignment.start,
+          child: ListView(
             children: [
               _getCategoryGroup(),
               _getPopularGroup(),
@@ -61,7 +57,6 @@ class _ShopPageState extends State<ShopPage> {
       //errors when budiling the ListView
       height: itemHeight,
       // Margin for the spacing on the column
-      margin: EdgeInsets.only(top: 24),
       child: StreamBuilder(
         stream: provider.categoriesStream,
         builder: (context, snapshot) {
