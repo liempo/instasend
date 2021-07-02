@@ -19,7 +19,8 @@ class ShopItem extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context)
+          .canvasColor,
         borderRadius: BorderRadius
           .circular(cardBorderRadius),
         boxShadow: [
