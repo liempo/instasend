@@ -6,6 +6,7 @@ import '/view_models/home_model.dart';
 
 import 'home_nav_bar.dart';
 import 'shop/shop_page.dart';
+import 'delivery/delivery_page.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           case HomeState.SHOP:
             return ShopPage.withViewModel();
           case HomeState.DELIVERY:
-            return Scaffold();
+            return DeliveryPage.withViewModel();
           case HomeState.PROFILE:
             return Scaffold();
         }
