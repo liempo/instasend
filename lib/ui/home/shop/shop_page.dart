@@ -27,18 +27,17 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        ShopAppBar(),
-        SliverFillRemaining(
-          child: ListView(
-            children: [
-              _getCategoryGroup(),
-              _getPopularGroup(),
-            ]
-          )
-        )
-      ],
+    return NestedScrollView(
+      headerSliverBuilder:
+        (context, innerBoxIsScrolled) => [
+          ShopAppBar()
+        ],
+      body: ListView(
+        children: [
+          _getCategoryGroup(),
+          _getPopularGroup(),
+        ]
+      ),
     );
   }
 
