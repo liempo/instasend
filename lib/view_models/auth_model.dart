@@ -9,6 +9,8 @@ import '/utils/locator.dart';
 import '/utils/constants.dart';
 import '/utils/string_extension.dart';
 
+// TODO Break down into more View Models
+// Example: LoginFormViewModel, etc.
 class AuthModel extends ChangeNotifier {
 
   final _nav = services<NavigationService>();
