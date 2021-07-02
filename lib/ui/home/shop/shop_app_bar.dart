@@ -112,7 +112,7 @@ class HomeAppBar extends StatelessWidget {
       .of<HomeModel>(context,
         listen: false);
     return StreamBuilder(
-      stream: provider.currentAddress,
+      stream: provider.currentLocalityStream,
       builder: (context, snapshot) {
         String text = snapshot.hasData ?
           snapshot.data.toString() :

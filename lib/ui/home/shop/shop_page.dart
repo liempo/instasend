@@ -63,7 +63,7 @@ class _ShopPageState extends State<ShopPage> {
       // Margin for the spacing on the column
       margin: EdgeInsets.only(top: 24),
       child: StreamBuilder(
-        stream: provider.categories,
+        stream: provider.categoriesStream,
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Container();
@@ -113,7 +113,7 @@ class _ShopPageState extends State<ShopPage> {
           // when budiling the ListView
           height: itemHeight,
           child: StreamBuilder(
-            stream: provider.shops,
+            stream: provider.shopsStream,
             builder: (context, snapshot) {
               if (!snapshot.hasData)
                 return Container();

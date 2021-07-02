@@ -11,13 +11,13 @@ class ShopModel extends ChangeNotifier {
   final _shops = repos<ShopRepository>();
 
   // Transform these streams into a view model
-  get categories => _shops.getShopCategories()
+  get categoriesStream => _shops.getShopCategories()
     .map((list) => list.map(
         (e) => CategortyItemViewModel(e)
       ).toList()
     );
 
-  get shops => _shops.getShops()
+  get shopsStream => _shops.getShops()
     .map((list) => list.map(
         (e) => ShopItemViewModel(e)
       ).toList()

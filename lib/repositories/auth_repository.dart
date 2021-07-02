@@ -5,12 +5,12 @@ class AuthRepository {
   // Save the firebase auth instance
   var _auth = FirebaseAuth.instance;
 
-  // Using Stream to listen to Firebase user
-  Stream<User?> get userStream =>
-    _auth.authStateChanges();
-
   // Get Firebase user directly
   User? get user => _auth.currentUser;
+
+  // Using Stream to listen to Firebase user
+  Stream<User?> getUserStream() =>
+    _auth.authStateChanges();
 
   // Create account using email and password
   Future<String> register({
@@ -55,7 +55,6 @@ class AuthRepository {
     _auth.signOut();
   }
 
-  // TODO
   Future<String> recover({
     required String email
   }) async {
