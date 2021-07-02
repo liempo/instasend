@@ -9,7 +9,7 @@ class ShopAppBar extends StatelessWidget {
 
   final _expandedHeightPercent = 0.25;
   final _searchBarHeight = 54.0;
-  final _textMaxWidth = 196.0;
+  final _textMaxWidth = 224.0;
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +111,8 @@ class ShopAppBar extends StatelessWidget {
     final provider = Provider
       .of<HomeModel>(context,
         listen: false);
-    return StreamBuilder(
-      stream: provider.currentLocalityStream,
+    return FutureBuilder(
+      future: provider.currentPlacemark,
       builder: (context, snapshot) {
         String text = snapshot.hasData ?
           snapshot.data.toString() :

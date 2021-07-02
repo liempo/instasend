@@ -16,9 +16,8 @@ class HomeModel extends ChangeNotifier {
     .getProfileStream(uid: _auth.user!.uid)
     .map((profile) => profile.firstName);
 
-  Stream<String> get currentLocalityStream => _loc
-    .getCurrentLocalityStream()
-    .map((data) => "$data");
+  Future<String> get currentPlacemark =>
+    _loc.currentPlacemark;
 
   HomeState _state = HomeState.SHOP;
   HomeState get state => _state;

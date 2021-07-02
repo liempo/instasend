@@ -15,15 +15,21 @@ class LocationService {
   get permissinGranted =>
     _permissionStatus == Location.PermissionStatus.granted;
 
+  // BUG: https://github.com/Lyokone/flutterlocation/issues/572
+  Future<Location.LocationData> get lastKnownLocation
+    => _location.getLocation();
+
   Stream<Location.LocationData> getCurrentLocationStream() =>
     _location.onLocationChanged;
 
-  Stream<String> getCurrentLocalityStream() =>
-    _location.onLocationChanged
-    .asyncMap((data) => Geocoding.placemarkFromCoordinates(
-      data.latitude!, data.longitude!)
-      .then((value) => value.first.locality!)
-    );
+  Future<String> get currentPlacemark async {
+    final data = await _location.getLocation();
+    final placemark = (await Geocoding
+      .placemarkFromCoordinates(
+        data.latitude!, data.longitude!
+    )).first; // Get the first placemark of the result
+    return "${placemark.locality}, ${placemark.subLocality}";
+  }
 
   void _enable() async {
     _serviceEnabled = await _location.serviceEnabled();
