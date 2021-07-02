@@ -5,7 +5,7 @@ import '/view_models/home_model.dart';
 import '/utils/image_extension.dart';
 import '/utils/constants.dart';
 
-class HomeAppBar extends StatelessWidget {
+class ShopAppBar extends StatelessWidget {
 
   final _expandedHeightPercent = 0.25;
   final _searchBarHeight = 54.0;
