@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '/view_models/delivery_model.dart';
+import '/ui/widgets/widgets.dart';
 import '/utils/constants.dart';
 
 class DeliveryPage extends StatefulWidget {
@@ -57,7 +58,16 @@ class _DeliveryPageState extends State<DeliveryPage> {
           body: "Please select a destination"
         ),
         Spacer(),
-        _getSubmitButton()
+
+        Container(
+          child: AppButton(
+            text: "Submit",
+            onPressed: () {},
+          ),
+          margin: EdgeInsets.only(
+            left: 32, right: 32, bottom: 16
+          )
+        )
       ]
     ),
   );
@@ -118,44 +128,13 @@ class _DeliveryPageState extends State<DeliveryPage> {
             blurRadius: 8,
             color: Theme.of(context)
               .primaryColor
-              .withOpacity(0.25)
+                .withOpacity(0.15)
           )
         ]
       ),
     );
   }
 
-  Widget _getSubmitButton() {
-    return Consumer<DeliveryModel>(
-      builder: (context, value, child) {
-        return Container(
-          height: 60,
-          width: double.infinity,
-          margin: EdgeInsets.only(
-            left: 32, right: 32, bottom: 16
-          ),
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              "Submit",
-              style: Theme.of(context)
-                .primaryTextTheme
-                .subtitle1!
-                .copyWith(
-                  fontWeight: FontWeight.bold
-                )
-            ),
-          )
-        );
-      },
-      child: Container(
-        width: 24, height: 24,
-        child: CircularProgressIndicator(
-          color: Theme.of(context)
-          .primaryIconTheme.color,
-        ),
-      ),
-    );
-  }
 
 }
+

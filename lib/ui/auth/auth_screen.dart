@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/ui/widgets/widgets.dart';
 import '/models/auth_type.dart';
 import '/view_models/auth_model.dart';
 import '/utils/image_extension.dart';
@@ -184,34 +185,15 @@ class _AuthScreenState extends State<AuthScreen> {
     return Consumer<AuthModel>(
       builder: (context, value, child) {
         return Container(
-          height: 60,
-          width: double.infinity,
-          margin: EdgeInsets.symmetric(
-            horizontal: 32
+          margin: EdgeInsets
+            .symmetric(horizontal: 32),
+          child: AppButton(
+            text: value.getPrimaryButtonText(),
+            onPressed: value.submit,
+            isLoading: value.isLoading,
           ),
-          child: ElevatedButton(
-            onPressed: value.isLoading ?
-               null : value.submit,
-            child: value.isLoading ? child :
-              Text(
-                value.getPrimaryButtonText(),
-                style: Theme.of(context)
-                  .primaryTextTheme
-                  .subtitle1!
-                  .copyWith(
-                    fontWeight: FontWeight.bold
-                  )
-              ),
-          )
         );
-      },
-      child: Container(
-        width: 24, height: 24,
-        child: CircularProgressIndicator(
-          color: Theme.of(context)
-          .primaryIconTheme.color,
-        ),
-      ),
+      }
     );
   }
 
