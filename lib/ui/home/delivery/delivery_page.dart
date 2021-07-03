@@ -23,6 +23,8 @@ class DeliveryPage extends StatefulWidget {
 
 class _DeliveryPageState extends State<DeliveryPage> {
 
+  late final GoogleMapController _mapController;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -42,6 +44,16 @@ class _DeliveryPageState extends State<DeliveryPage> {
     return GoogleMap(
       initialCameraPosition: _astrotel,
       myLocationButtonEnabled: false,
+      onMapCreated: (controller) async {
+        _mapController = controller;
+        // Pan camera to curr location
+        final loc = await Provider
+          .of<DeliveryModel>(context, listen: false)
+            .lastKnownLocation;
+        _mapController.animateCamera(
+          CameraUpdate.newLatLng(loc.toLatLng())
+        );
+      },
     );
   }
 
@@ -58,16 +70,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
           body: "Please select a destination"
         ),
         Spacer(),
-
-        Container(
-          child: AppButton(
-            text: "Submit",
-            onPressed: () {},
-          ),
-          margin: EdgeInsets.only(
-            left: 32, right: 32, bottom: 16
-          )
-        )
+        _getSubmitButton()
       ]
     ),
   );
@@ -135,6 +138,18 @@ class _DeliveryPageState extends State<DeliveryPage> {
     );
   }
 
+
+  Widget _getSubmitButton() {
+    return Container(
+      child: AppButton(
+        text: "Submit",
+        onPressed: () {},
+      ),
+      margin: EdgeInsets.only(
+        left: 32, right: 32, bottom: 16
+      )
+    );
+  }
 
 }
 
