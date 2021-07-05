@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '/view_models/delivery_model.dart';
+import '/view_models/delivery_page_model.dart';
 import '/ui/widgets/widgets.dart';
 import '/utils/constants.dart';
 
@@ -14,7 +14,7 @@ class DeliveryPage extends StatefulWidget {
 
   static Widget withViewModel() {
     return ChangeNotifierProvider(
-      create: (context) => DeliveryModel(),
+      create: (context) => DeliveryPageModel(),
       builder: (context, child) => DeliveryPage()
     );
   }
@@ -48,7 +48,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
         _mapController = controller;
         // Pan camera to curr location
         final loc = await Provider
-          .of<DeliveryModel>(context, listen: false)
+          .of<DeliveryPageModel>(context, listen: false)
             .lastKnownLocation;
         _mapController.animateCamera(
           CameraUpdate.newLatLng(loc.toLatLng())
