@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
 import '/services/nav_service.dart';
-import '/models/auth_type.dart';
 import '/models/profile.dart';
 import '/utils/locator.dart';
 import '/utils/constants.dart';
@@ -280,4 +279,8 @@ class AuthScreenModel extends ChangeNotifier {
     );
   }
 
+}
+
+enum AuthType {
+  LOGIN, REGISTER, RECOVER, PROFILE
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/ui/widgets/widgets.dart';
-import '/models/auth_type.dart';
 import '/view_models/auth_screen_model.dart';
 import '/utils/image_extension.dart';
 import '/utils/constants.dart';

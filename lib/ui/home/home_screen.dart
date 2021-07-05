@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/models/home_state.dart';
 import '/view_models/home_screen_model.dart';
-
 import 'home_nav_bar.dart';
 import 'shop/shop_page.dart';
 import 'delivery/delivery_page.dart';

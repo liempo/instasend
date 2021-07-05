@@ -1,3 +1,0 @@
-enum AuthType {
-  LOGIN, REGISTER, RECOVER, PROFILE
-}

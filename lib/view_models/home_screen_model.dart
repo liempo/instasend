@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:instasend/models/home_state.dart';
 
 import '/repositories/auth_repository.dart';
 import '/repositories/profile_repository.dart';
@@ -29,4 +28,8 @@ class HomeScreenModel extends ChangeNotifier {
     notifyListeners();
   }
 
+}
+
+enum HomeState {
+  SHOP, DELIVERY, PROFILE
 }
