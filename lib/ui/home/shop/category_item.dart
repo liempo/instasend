@@ -3,7 +3,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-import '/view_models/shop_model.dart';
+import '/view_models/shop_page_model.dart';
 import '/utils/constants.dart';
 
 class CategoryItem extends StatelessWidget {

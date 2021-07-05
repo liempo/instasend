@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
-import '/view_models/shop_model.dart';
+import '/view_models/shop_page_model.dart';
 
 import 'shop_app_bar.dart';
 import 'category_item.dart';
@@ -16,7 +16,7 @@ class ShopPage extends StatefulWidget {
 
   static Widget withViewModel() {
     return ChangeNotifierProvider(
-      create: (context) => ShopModel(),
+      create: (context) => ShopPageModel(),
       builder: (context, child) => ShopPage()
     );
   }
@@ -44,7 +44,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget _getCategoryGroup() {
     // Get provider here to access the category stream
     final provider = Provider
-      .of<ShopModel>(context, listen: false);
+      .of<ShopPageModel>(context, listen: false);
 
     // Calculate the dimensions and size here
     final size = MediaQuery.of(context).size;
@@ -88,7 +88,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget _getPopularGroup() {
     // Get provider here to access the shops stream
     final provider = Provider
-      .of<ShopModel>(context, listen: false);
+      .of<ShopPageModel>(context, listen: false);
 
     // Calculate the dimensions and size here
     final size = MediaQuery.of(context).size;

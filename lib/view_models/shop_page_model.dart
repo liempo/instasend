@@ -6,7 +6,7 @@ import '/models/shop.dart';
 import '/models/category.dart';
 import '/utils/locator.dart';
 
-class ShopModel extends ChangeNotifier {
+class ShopPageModel extends ChangeNotifier {
 
   final _shops = repos<ShopRepository>();
 
