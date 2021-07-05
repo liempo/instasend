@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/view_models/home_model.dart';
+import '/view_models/home_screen_model.dart';
 
 class HomeNavBar extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class HomeNavBar extends StatelessWidget {
           )
         ]
       ),
-      child: Consumer<HomeModel>(
+      child: Consumer<HomeScreenModel>(
         builder: (context, value, child) =>
           BottomNavigationBar(
             currentIndex: value.stateIndex,

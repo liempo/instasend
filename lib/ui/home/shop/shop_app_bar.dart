@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/view_models/home_model.dart';
+import '/view_models/home_screen_model.dart';
 import '/utils/image_extension.dart';
 import '/utils/constants.dart';
 
@@ -84,7 +84,7 @@ class ShopAppBar extends StatelessWidget {
 
   Widget _getGreetingText(BuildContext context) {
     final provider = Provider
-      .of<HomeModel>(context, listen: false);
+      .of<HomeScreenModel>(context, listen: false);
     return StreamBuilder(
       stream: provider.firstNameStream,
       builder: (context, snapshot) {
@@ -109,7 +109,7 @@ class ShopAppBar extends StatelessWidget {
 
   Widget _getAddressText(BuildContext context) {
     final provider = Provider
-      .of<HomeModel>(context,
+      .of<HomeScreenModel>(context,
         listen: false);
     return FutureBuilder(
       future: provider.currentPlacemark,

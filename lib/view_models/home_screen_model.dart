@@ -6,7 +6,7 @@ import '/repositories/profile_repository.dart';
 import '/services/location_service.dart';
 import '/utils/locator.dart';
 
-class HomeModel extends ChangeNotifier {
+class HomeScreenModel extends ChangeNotifier {
 
   final _profiles = repos<ProfileRepository>();
   final _auth = repos<AuthRepository>();
