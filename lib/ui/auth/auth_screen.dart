@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '/ui/widgets/widgets.dart';
 import '/models/auth_type.dart';
-import '/view_models/auth_model.dart';
+import '/view_models/auth_screen_model.dart';
 import '/utils/image_extension.dart';
 import '/utils/constants.dart';
 
@@ -20,7 +20,7 @@ class AuthScreen extends StatefulWidget {
 
   static Widget withViewModel() {
     return ChangeNotifierProvider(
-      create: (context) => AuthModel(),
+      create: (context) => AuthScreenModel(),
       builder: (context, child) => AuthScreen()
     );
   }
@@ -95,7 +95,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget _getActiveForm() {
     final size = MediaQuery
       .of(context).size;
-    return Consumer<AuthModel>(
+    return Consumer<AuthScreenModel>(
       builder: (context, value, child) {
         // Create the form based on type
         // NOTE: Not sure if I did this correctly,
@@ -144,7 +144,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getAlternateButton() {
-    return Consumer<AuthModel>(
+    return Consumer<AuthScreenModel>(
       builder: (context, value, child) {
         return Container(
           padding: EdgeInsets.only(
@@ -162,7 +162,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getAuthenticationEror() {
-    return Consumer<AuthModel>(
+    return Consumer<AuthScreenModel>(
       builder: (context, value, child) {
         if (value.errorAuth == null)
           return Container();
@@ -182,7 +182,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Widget _getSubmitButton() {
-    return Consumer<AuthModel>(
+    return Consumer<AuthScreenModel>(
       builder: (context, value, child) {
         return Container(
           margin: EdgeInsets

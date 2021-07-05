@@ -11,7 +11,7 @@ import '/utils/string_extension.dart';
 
 // TODO Break down into more View Models
 // Example: LoginFormViewModel, etc.
-class AuthModel extends ChangeNotifier {
+class AuthScreenModel extends ChangeNotifier {
 
   final _nav = services<NavigationService>();
   final _auth = repos<AuthRepository>();

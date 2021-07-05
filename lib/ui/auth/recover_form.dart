@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/view_models/auth_model.dart';
+import '/view_models/auth_screen_model.dart';
 
 class RecoverForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider
-      .of<AuthModel>(context);
+      .of<AuthScreenModel>(context);
     double spacing = 18;
     return Container(
       child: Column(
