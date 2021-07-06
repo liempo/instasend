@@ -27,11 +27,11 @@ class HomeScreen extends StatelessWidget {
     return Consumer<HomeScreenModel>(
       builder: (context, value, child) {
         switch (value.state) {
-          case HomeState.SHOP:
+          case HomeState.shop:
             return ShopPage.withViewModel();
-          case HomeState.DELIVERY:
+          case HomeState.delivery:
             return DeliveryPage.withViewModel();
-          case HomeState.PROFILE:
+          case HomeState.profile:
             return Scaffold();
         }
       }

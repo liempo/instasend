@@ -29,9 +29,9 @@ class Profile {
 }
 
 enum ProfileType {
-  STANDARD,
-  BUSINESS,
-  RIDER
+  standard,
+  business,
+  rider
 }
 
 extension ProfileTypeExtension on ProfileType {
@@ -45,7 +45,7 @@ extension ProfileTypeExtension on ProfileType {
     for (var type in ProfileType.values)
       if (type.toBetterString() == text)
         return type;
-    throw Exception("ProfileType not found");
+    throw Exception("$text not found");
   }
 
 }

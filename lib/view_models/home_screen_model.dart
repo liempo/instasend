@@ -18,7 +18,7 @@ class HomeScreenModel extends ChangeNotifier {
   Future<String> get currentPlacemark =>
     _loc.currentPlacemark;
 
-  HomeState _state = HomeState.SHOP;
+  HomeState _state = HomeState.shop;
   HomeState get state => _state;
   get stateIndex => HomeState.values.indexOf(_state);
 
@@ -31,5 +31,5 @@ class HomeScreenModel extends ChangeNotifier {
 }
 
 enum HomeState {
-  SHOP, DELIVERY, PROFILE
+  shop, delivery, profile
 }

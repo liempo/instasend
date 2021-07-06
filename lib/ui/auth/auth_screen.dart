@@ -101,8 +101,8 @@ class _AuthScreenState extends State<AuthScreen> {
         //  because as far as I know, the View layer
         //  should not be aware of the models. Fix pls.
         Widget? form;
-        switch (value.type) {
-          case AuthType.LOGIN:
+        switch (value.state) {
+          case AuthState.login:
             form = Column(
               crossAxisAlignment:
                 CrossAxisAlignment.start,
@@ -117,11 +117,11 @@ class _AuthScreenState extends State<AuthScreen> {
               ],
             );
             break;
-          case AuthType.REGISTER:
+          case AuthState.register:
             form = RegisterForm(); break;
-          case AuthType.RECOVER:
+          case AuthState.recover:
             form = RecoverForm(); break;
-          case AuthType.PROFILE:
+          case AuthState.profile:
             form = ProfileForm(); break;
         }
 

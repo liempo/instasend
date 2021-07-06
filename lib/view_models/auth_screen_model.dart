@@ -41,15 +41,15 @@ class AuthScreenModel extends ChangeNotifier {
     => _lastName = text;
   String? _errorLastName;
   get errorLastName => _errorLastName;
-  ProfileType _profileType = ProfileType.STANDARD;
+  ProfileType _profileType = ProfileType.standard;
 
   // Authentication message for errors and stuff
   String? _errorAuth;
   get errorAuth => _errorAuth;
 
   // Determines what form to show in the UI
-  AuthType _authType = AuthType.REGISTER;
-  AuthType get type => _authType;
+  AuthState _authState = AuthState.register;
+  AuthState get state => _authState;
 
   // Binded to disable some widgets
   bool _isLoading = false;
@@ -77,15 +77,15 @@ class AuthScreenModel extends ChangeNotifier {
 
   // Swaps forms depending on what's visible
   void swap() {
-    switch (_authType) {
-      case AuthType.LOGIN:
-        _authType = AuthType.REGISTER; break;
-      case AuthType.REGISTER:
-        _authType = AuthType.LOGIN; break;
-      case AuthType.RECOVER:
-        _authType = AuthType.LOGIN; break;
-      case AuthType.PROFILE:
-        _authType = AuthType.LOGIN; break;
+    switch (_authState) {
+      case AuthState.login:
+        _authState = AuthState.register; break;
+      case AuthState.register:
+        _authState = AuthState.login; break;
+      case AuthState.recover:
+        _authState = AuthState.login; break;
+      case AuthState.profile:
+        _authState = AuthState.login; break;
     }
 
     // Clear error text every time user swaps
@@ -99,7 +99,7 @@ class AuthScreenModel extends ChangeNotifier {
   }
 
   void setTypeToRecover() {
-    _authType = AuthType.RECOVER;
+    _authState = AuthState.recover;
     notifyListeners();
   }
 
@@ -111,34 +111,34 @@ class AuthScreenModel extends ChangeNotifier {
   }
 
   String getPrimaryButtonText() {
-    switch (_authType) {
-      case AuthType.LOGIN:
+    switch (_authState) {
+      case AuthState.login:
         return "Login";
-      case AuthType.REGISTER:
+      case AuthState.register:
         return "Register";
-      case AuthType.RECOVER:
+      case AuthState.recover:
         return "Recover";
-      case AuthType.PROFILE:
+      case AuthState.profile:
         return "Finish";
     }
   }
 
   String getAlternateButtonText() {
-    switch (_authType) {
-      case AuthType.LOGIN:
+    switch (_authState) {
+      case AuthState.login:
         return "Don't have an account yet?";
-      case AuthType.REGISTER:
+      case AuthState.register:
         return "Already have an account?";
-      case AuthType.RECOVER:
+      case AuthState.recover:
         return "Go back to logging in";
-      case AuthType.PROFILE:
+      case AuthState.profile:
         return "Log in  to a different account";
     }
   }
 
   bool _checkFormValid() {
     // Profile field validations
-    if (_authType == AuthType.PROFILE) {
+    if (_authState == AuthState.profile) {
       if (_firstName == null || _firstName == "")
         _errorFirstName = "First name cannot be empty";
       else _errorFirstName = null;
@@ -177,7 +177,7 @@ class AuthScreenModel extends ChangeNotifier {
         .getProfile(uid: _auth.user!.uid);
 
       if (profile == null) {
-        _authType = AuthType.PROFILE;
+        _authState = AuthState.profile;
         notifyListeners(); return;
       }
 
@@ -198,7 +198,7 @@ class AuthScreenModel extends ChangeNotifier {
       _errorAuth = result;
     else
       // Upadte form to show
-      _authType = AuthType.PROFILE;
+      _authState = AuthState.profile;
 
     notifyListeners();
   }
@@ -258,14 +258,14 @@ class AuthScreenModel extends ChangeNotifier {
     }
 
     // Create switch for firebase call
-    switch (_authType) {
-      case AuthType.LOGIN:
+    switch (_authState) {
+      case AuthState.login:
         _login(); break;
-      case AuthType.REGISTER:
+      case AuthState.register:
         _register(); break;
-      case AuthType.RECOVER:
+      case AuthState.recover:
         _recover(); break;
-      case AuthType.PROFILE:
+      case AuthState.profile:
         _createProfile(); break;
     }
 
@@ -281,6 +281,6 @@ class AuthScreenModel extends ChangeNotifier {
 
 }
 
-enum AuthType {
-  LOGIN, REGISTER, RECOVER, PROFILE
+enum AuthState {
+  login, register, recover, profile
 }

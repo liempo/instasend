@@ -28,9 +28,9 @@ class Delivery {
 }
 
 enum DeliveryStatus {
-  SEARCHING, // App is still searching for a rider
-  IN_TRANSIT, // Rider has picked up parcel and is on the way to destination
-  DELIVERED // Parcel has been delivered to destination
+  searching, // App is still searching for a rider
+  transit, // Rider has picked up parcel and is on the way to destination
+  delivered // Parcel has been delivered to destination
 }
 
 extension DeliveryStatusExtension on DeliveryStatus {
@@ -44,7 +44,7 @@ extension DeliveryStatusExtension on DeliveryStatus {
     for (var type in DeliveryStatus.values)
       if (type.toBetterString() == text)
         return type;
-    throw Exception("DeliveryStatus not found");
+    throw Exception("$text not found");
   }
 
 }
