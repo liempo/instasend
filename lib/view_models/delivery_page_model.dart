@@ -15,5 +15,4 @@ class DeliveryPageModel extends ChangeNotifier {
       lng: data.longitude!
     );
   }
-
 }

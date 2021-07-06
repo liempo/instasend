@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '/view_models/delivery_page_model.dart';
 import '/ui/widgets/widgets.dart';
 import '/utils/constants.dart';
+
+import 'waypoint_form_dialog.dart';
 
 class DeliveryPage extends StatefulWidget {
 
@@ -23,6 +26,11 @@ class DeliveryPage extends StatefulWidget {
 
 class _DeliveryPageState extends State<DeliveryPage> {
 
+  static const _astrotel = CameraPosition(
+    target: LatLng( 14.1934414, 121.1657594),
+    zoom: 16
+  );
+
   late final GoogleMapController _mapController;
 
   @override
@@ -31,16 +39,11 @@ class _DeliveryPageState extends State<DeliveryPage> {
       children: [
         _getGoogleMap(),
         _getOverlay()
-      ],
+      ]
     );
   }
 
   Widget _getGoogleMap() {
-    final _astrotel = CameraPosition(
-      target: LatLng(
-        14.1934414, 121.1657594
-      ), zoom: 16
-    );
     return GoogleMap(
       initialCameraPosition: _astrotel,
       myLocationButtonEnabled: false,
@@ -59,26 +62,66 @@ class _DeliveryPageState extends State<DeliveryPage> {
 
   SafeArea _getOverlay() {
     return SafeArea(
-    child: Column(
-      children: [
-        _createAddressButton(
-          title: "Pickup",
-          body: "Current location"
-        ),
-        _createAddressButton(
-          title: "Delivery",
-          body: "Please select a destination"
-        ),
-        Spacer(),
-        _getSubmitButton()
-      ]
-    ),
-  );
+      child: Column(
+        children: [
+          _createWaypointButton(
+            title: "Pickup",
+            body: "Current location",
+            onTap: _showWaypointForm
+          ),
+          _createWaypointButton(
+            title: "Delivery",
+            body: "Please select a destination",
+            onTap: _showWaypointForm
+          ),
+          Spacer(),
+          _getSubmitButton()
+        ]
+      ),
+    );
   }
 
-  Widget _createAddressButton({
+  // Widget _getSelectModeOverlay() {
+  //   return SafeArea(
+  //     child: Column(
+  //       children: [
+
+
+  //         Spacer(),
+  //         _getSubmitButton()
+  //       ]
+  //     ),
+  //   );
+  // }
+
+  // Widget _getSearchBar() {
+  //   return FloatingContainer(
+  //     child: TypeAheadField(
+  //       textFieldConfiguration: TextFieldConfiguration(
+  //         decoration: InputDecoration(
+  //           enabledBorder: InputBorder.none,
+  //           focusedBorder: InputBorder.none,
+  //           hintText: "Search",
+  //           hintStyle: TextStyle(
+  //             color: Theme.of(context)
+  //               .primaryColor
+  //               .withOpacity(0.5)
+  //           )
+  //         ),
+  //       ), itemBuilder: (BuildContext context, itemData) =>
+  //         ListTile(
+  //           title: Text("$itemData")
+  //         ),
+  //       onSuggestionSelected: (value),
+  //     )
+  //   );
+  // }
+
+
+  Widget _createWaypointButton({
     required String title,
-    required String body
+    required String body,
+    required Function() onTap,
   }) {
     // Extracted to prevent deep nesting (code-wise)
     var header = Row(
@@ -105,7 +148,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
           .circular(cardBorderRadius),
         child: Material(
           child: InkWell(
-            onTap: () {},
+            onTap: onTap,
             child: Container(
               padding: EdgeInsets.all(16),
               child: Column(
@@ -122,22 +165,18 @@ class _DeliveryPageState extends State<DeliveryPage> {
           ),
         ),
       ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius
-          .circular(cardBorderRadius),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 4),
-            blurRadius: 8,
-            color: Theme.of(context)
-              .primaryColor
-                .withOpacity(0.15)
-          )
-        ]
-      ),
+      decoration: _getBoxDecoration(),
     );
   }
 
+
+  void _showWaypointForm() =>
+    showDialog(
+      context: context,
+      builder: (context) {
+         return WaypointFormDialog();
+      }
+    );
 
   Widget _getSubmitButton() {
     return Container(
@@ -148,6 +187,22 @@ class _DeliveryPageState extends State<DeliveryPage> {
       margin: EdgeInsets.only(
         left: 32, right: 32, bottom: 16
       )
+    );
+  }
+
+  BoxDecoration _getBoxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius
+        .circular(cardBorderRadius),
+      boxShadow: [
+        BoxShadow(
+          offset: Offset(0, 4),
+          blurRadius: 8,
+          color: Theme.of(context)
+            .primaryColor
+              .withOpacity(0.15)
+        )
+      ]
     );
   }
 

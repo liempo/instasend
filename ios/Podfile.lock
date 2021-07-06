@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (2.2.2):
+  - cloud_firestore (2.3.0):
     - Firebase/Firestore (= 8.0.0)
     - firebase_core
     - Flutter
@@ -41,6 +41,8 @@ PODS:
   - FirebaseFirestore/WithLeveldb (8.0.0):
     - FirebaseFirestore/Base
   - Flutter (1.0.0)
+  - flutter_keyboard_visibility (0.0.1):
+    - Flutter
   - geocoding (1.0.5):
     - Flutter
   - google_maps_flutter (0.0.1):
@@ -86,6 +88,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `8.0.0`)
   - Flutter (from `Flutter`)
+  - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - location (from `.symlinks/plugins/location/ios`)
@@ -115,6 +118,8 @@ EXTERNAL SOURCES:
     :tag: 8.0.0
   Flutter:
     :path: Flutter
+  flutter_keyboard_visibility:
+    :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   geocoding:
     :path: ".symlinks/plugins/geocoding/ios"
   google_maps_flutter:
@@ -128,7 +133,7 @@ CHECKOUT OPTIONS:
     :tag: 8.0.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 83d6cd19d24798c523265494ab81db32009fcb7b
+  cloud_firestore: 0e708a57ee3e13a56cf6a6fdaf085d5edb1e7e0f
   Firebase: 73c3e3b216ec1ecbc54d2ffdd4670c65c749edb1
   firebase_auth: 6532658f5a4f76be32cd5e7518753ebedd4544d2
   firebase_core: cda81ae37eda6df2bc2d16027fda527987c4bd33
@@ -137,6 +142,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 3e249cee3de5c5f9cfd6cc2a19997231286fec11
   FirebaseFirestore: 0d1548ab6085002d87c173ce3f881129f39b3565
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
   google_maps_flutter: df4e7de95264aa0a2f11aac0fc7e313acb8ffc7e
   GoogleDataTransport: 04c3e9a480bbcaa2ec3f5d27f1cdeb6a92f20c8d
