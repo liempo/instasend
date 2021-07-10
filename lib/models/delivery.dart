@@ -1,5 +1,4 @@
 import '/models/waypoint.dart';
-import '/utils/string_extension.dart';
 
 class Delivery {
 
@@ -38,7 +37,7 @@ extension DeliveryStatusExtension on DeliveryStatus {
   String toBetterString() =>
     toString().substring(
        toString().indexOf('.') + 1
-    ).capitalize();
+    );
 
   static DeliveryStatus fromBetterString(String text) {
     for (var type in DeliveryStatus.values)

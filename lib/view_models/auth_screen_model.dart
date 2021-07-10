@@ -6,7 +6,6 @@ import '/services/nav_service.dart';
 import '/models/profile.dart';
 import '/utils/locator.dart';
 import '/utils/constants.dart';
-import '/utils/string_extension.dart';
 
 // TODO Break down into more View Models
 // Example: LoginFormViewModel, etc.
@@ -72,7 +71,7 @@ class AuthScreenModel extends ChangeNotifier {
   // Get the list of profile as String
   List<String> getProfileTypeList() =>
     ProfileType.values.map((e) {
-      return e.toBetterString().capitalize();
+      return e.toBetterString();
     }).toList();
 
   // Swaps forms depending on what's visible

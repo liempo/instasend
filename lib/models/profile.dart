@@ -1,5 +1,3 @@
-import '/utils/string_extension.dart';
-
 class Profile {
 
   final String firstName;
@@ -19,6 +17,8 @@ class Profile {
         .fromBetterString(map["type"]);
 
   Map<String, dynamic> toMap() {
+
+    print( this.type.toBetterString());
     return {
       'firstName': this.firstName,
       'lastName': this.lastName,
@@ -39,7 +39,7 @@ extension ProfileTypeExtension on ProfileType {
   String toBetterString() =>
     toString().substring(
        toString().indexOf('.') + 1
-    ).capitalize();
+    );
 
   static ProfileType fromBetterString(String text) {
     for (var type in ProfileType.values)

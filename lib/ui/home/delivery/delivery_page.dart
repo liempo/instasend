@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '/view_models/delivery_page_model.dart';
@@ -38,7 +38,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
     return Stack(
       children: [
         _getGoogleMap(),
-        _getOverlay()
+        _getSelectModeOverlay()
       ]
     );
   }
@@ -60,7 +60,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
     );
   }
 
-  SafeArea _getOverlay() {
+  Widget _getWaypointOverlay() {
     return SafeArea(
       child: Column(
         children: [
@@ -81,18 +81,16 @@ class _DeliveryPageState extends State<DeliveryPage> {
     );
   }
 
-  // Widget _getSelectModeOverlay() {
-  //   return SafeArea(
-  //     child: Column(
-  //       children: [
-
-
-  //         Spacer(),
-  //         _getSubmitButton()
-  //       ]
-  //     ),
-  //   );
-  // }
+  Widget _getSelectModeOverlay() {
+    return SafeArea(
+      child: Column(
+        children: [
+          Spacer(),
+          _getSubmitButton()
+        ]
+      ),
+    );
+  }
 
   // Widget _getSearchBar() {
   //   return FloatingContainer(
