@@ -11,5 +11,5 @@ The project uses MVVM Architecture with the help of `provider` and `get_it` pack
  - `repositories/` - Single source of truth (data). Consists of firebase helper classes.
  - `services/` - Contains services that should be available to the whole app. These services make some flutter utilities easier to use such as navigation, dialog, etc.
  - `ui/` - All Flutter screens, widgets, and other UI related.
- - `utils/` - Themes, static function, constant variables and other helper clases.
+ - `utils/` - Themes, static function, constant variables and other helper classes.
 
